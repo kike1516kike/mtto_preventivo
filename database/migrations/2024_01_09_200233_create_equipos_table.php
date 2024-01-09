@@ -34,7 +34,7 @@ return new class extends Migration
             $table->foreign('id_marca')->references('id_marca')->on('marcas')->onDelete('cascade');
             $table->unsignedInteger('id_ubicacion');
             $table->foreign('id_ubicacion')->references('id_ubicacion')->on('ubicaciones')->onDelete('cascade');
-            $table->unsignedInteger('id_offcie');
+            $table->unsignedInteger('id_office');
             $table->foreign('id_offcie')->references('id_offcie')->on('offices')->onDelete('cascade');
             $table->unsignedInteger('id_evento');
             $table->foreign('id_evento')->references('id_evento')->on('eventos')->onDelete('cascade');
