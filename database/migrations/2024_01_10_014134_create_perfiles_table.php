@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('marcas', function (Blueprint $table) {
-            $table->increments('id_marca');
-            $table->string('nombre_marca', 25);
-
+        Schema::create('perfiles', function (Blueprint $table) {
+            $table->increments('id_perfil');
+            $table->integer('cod_empleado_perfil');
+            $table->boolean('estado_perfil');
+            $table->string('observacion_perfil');
+            
             $table->datetime('fecha_registro');
             $table->string('usuario_registro', 50);
             $table->boolean('eliminado');
@@ -31,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('marcas');
+        Schema::dropIfExists('perfiles');
     }
 };

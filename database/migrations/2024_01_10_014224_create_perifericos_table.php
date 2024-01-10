@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('marcas', function (Blueprint $table) {
-            $table->increments('id_marca');
-            $table->string('nombre_marca', 25);
+        Schema::create('perifericos', function (Blueprint $table) {
+            $table->increments('id_periferico');
+            $table->string('tipo_periferico', 100); 
 
             $table->datetime('fecha_registro');
             $table->string('usuario_registro', 50);
@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('usuario_eliminado', 50);
             $table->datetime('fecha_modifica');
             $table->string('usuario_modifica', 50);
+
+            $table->unsignedInteger('id_perfil');
+            $table->foreign('id_perfil')->references('id_perfil')->on('perfiles')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('marcas');
+        Schema::dropIfExists('perifericos');
     }
 };

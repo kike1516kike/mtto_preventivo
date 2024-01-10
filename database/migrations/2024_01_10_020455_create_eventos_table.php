@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('marcas', function (Blueprint $table) {
-            $table->increments('id_marca');
-            $table->string('nombre_marca', 25);
+        Schema::create('eventos', function (Blueprint $table) {
+            $table->increments('id_evento');
+            $table->string('descripcion_evento');
 
             $table->datetime('fecha_registro');
             $table->string('usuario_registro', 50);
@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('usuario_eliminado', 50);
             $table->datetime('fecha_modifica');
             $table->string('usuario_modifica', 50);
+
+            $table->unsignedInteger('id_equipo');
+            $table->foreign('id_equipo')->references('id_equipo')->on('equipos')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('marcas');
+        Schema::dropIfExists('eventos');
     }
 };

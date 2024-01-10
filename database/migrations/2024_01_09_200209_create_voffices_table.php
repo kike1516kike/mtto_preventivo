@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('marcas', function (Blueprint $table) {
-            $table->increments('id_marca');
-            $table->string('nombre_marca', 25);
+        Schema::create('voffices', function (Blueprint $table) {
+            $table->increments('id_office');
+            $table->string('nombre_office', 100);
 
             $table->datetime('fecha_registro');
             $table->string('usuario_registro', 50);
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('usuario_eliminado', 50);
             $table->datetime('fecha_modifica');
             $table->string('usuario_modifica', 50);
-
+            
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('marcas');
+        Schema::dropIfExists('voffices');
     }
 };
