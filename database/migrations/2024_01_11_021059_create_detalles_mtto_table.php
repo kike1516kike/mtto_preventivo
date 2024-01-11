@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perfiles', function (Blueprint $table) {
-            $table->increments('id_perfil');
-            $table->integer('cod_empleado_perfil');
-            $table->string('nombres_perfil', 100);
-            $table->string('apellidos_perfil', 100);
-            $table->string('cargo_perfil', 100);
-            $table->boolean('estado_perfil');
-            $table->string('observacion_perfil');
-            
+        Schema::create('detalles_mtto', function (Blueprint $table) {
+            $table->increments('id_detalle_mtto');
+            $table->string('criterio_detalle_mtto');
+            $table->boolean('software_detalle_mtto');
+            $table->boolean('selecciona_criterio_mtto');
+
             $table->datetime('fecha_registro');
             $table->string('usuario_registro', 50);
             $table->boolean('eliminado');
             $table->string('usuario_eliminado', 50);
             $table->datetime('fecha_modifica');
             $table->string('usuario_modifica', 50);
+
+            $table->unsignedInteger('id_mantenimiento');
+            $table->foreign('id_mantenimiento')->references('id_mantenimiento')->on('mantenimientos')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perfiles');
+        Schema::dropIfExists('detalles_mtto');
     }
 };
