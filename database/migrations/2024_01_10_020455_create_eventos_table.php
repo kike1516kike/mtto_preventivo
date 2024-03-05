@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id_evento');
             $table->string('descripcion_evento');
-
+            $table->string('tipo_equipo');
+            $table->integer('codigo_equipo');
             $table->datetime('fecha_registro');
             $table->string('usuario_registro', 50);
             $table->boolean('eliminado');
@@ -22,8 +23,8 @@ return new class extends Migration
             $table->datetime('fecha_modifica');
             $table->string('usuario_modifica', 50);
 
-            $table->unsignedInteger('id_equipo');
-            $table->foreign('id_equipo')->references('id_equipo')->on('equipos')->onDelete('cascade');
+            // $table->unsignedInteger('id_equipo');
+            // $table->foreign('id_equipo')->references('id_equipo')->on('equipos')->onDelete('cascade');
 
             $table->timestamps();
         });
