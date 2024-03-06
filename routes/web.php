@@ -1,14 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 
 
 // Route::get('/', function () {
 //     return view('welcome');
 // });
 
- Route::view('/', 'index')->name('index');
- 
- //Route::middleware('auth')->group(function () {
-    Route::view('/home', 'home')->name('home');  
- //});
+ Route::post('login',function(){
+    $credenciales = request()->only('user', 'password');
+
+    if (Auth::attempt($credenciales)) {
+        return redirect()->route('home');
+    }
+return 'you are logged in';
+
+ });
+
+ Route::view('/home', 'home')->name('home');
+
+
+

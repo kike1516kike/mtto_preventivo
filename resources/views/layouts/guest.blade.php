@@ -7,10 +7,12 @@
     <title>@yield('title')</title>
     @vite (['resources/css/app.scss', 'resources/js/app.js'])
 </head>
-<body>
-    
- 
-    @yield('content')   
+<body oncopy="return false;" onselectstart="return false;" class="bg-dark text-white">
+
+
+    @yield('content')
+
+
 
 </body>
 </html>
