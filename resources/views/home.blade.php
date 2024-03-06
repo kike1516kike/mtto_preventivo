@@ -1,9 +1,8 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('title', 'Pagina de inicio')
 
 @section('content')
 
-    <h1>Hola</h1>
-    <x-carpeta.nombre
+    <h1>Home</h1>
 @endsection

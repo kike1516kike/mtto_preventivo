@@ -8,10 +8,9 @@
     @vite (['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-
-    <x-navigation/>
-
-    @yield('content')
+    
+ 
+    @yield('content')   
 
 </body>
 </html>
