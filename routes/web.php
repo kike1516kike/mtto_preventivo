@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -9,17 +9,10 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
- Route::post('login',function(){
-    $credenciales = request()->only('user', 'password');
-
-    if (Auth::attempt($credenciales)) {
-        return redirect()->route('home');
-    }
-return 'you are logged in';
-
- });
-
- Route::view('/home', 'home')->name('home');
 
 
+Route::get('/', [LoginController::class, 'index'])->name('index')->middleware('guest');
+Route::view('home','home')->name('home')->middleware('auth');
 
+// Route::post('/login', [LoginController::class, 'login']);
+// Route::post('/logout', [LoginController::class, 'logout']);
