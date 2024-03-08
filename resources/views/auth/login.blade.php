@@ -4,7 +4,11 @@
 
 @section('content')
 
-<h1>Login Cofasa</h1>
+
+
+<form method="POST" class="centrado_login col-md-6 mx-auto">
+    <h1>Login Cofasa</h1>
+    <h6>Mantenimiento Preventivo IT</h6>
 @if ($errors->any())
     <ul>
         @foreach ($errors->all() as $error)
@@ -12,9 +16,7 @@
         @endforeach
     </ul>
 @endif
-
-<form method="POST" >
-    @csrf 
+    @csrf
     <label for="">
         <input name="usuario" type="text" required autofocus value="{{ old('usuario') }}" placeholder="usuario">
     </label>
@@ -23,6 +25,7 @@
     </label>
     <button type="submit">Login</button>
 </form>
+
 
 
 @endsection

@@ -10,12 +10,16 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 Route::get('/', [LoginController::class, 'index'])->name('index')->middleware('guest');
-Route::post('/', [LoginController::class, 'login'])->name('login')->middleware('guest'); // Ruta POST para la ruta raíz
+Route::post('/', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::view('home', 'home')->name('home')->middleware('auth');
 
-// Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth');;
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
+
+
+
+
+// Route::post('/login', [LoginController::class, 'login']);
 // Route::get('/', [LoginController::class, 'index'])->name('index')->middleware('guest');
 // Route::view('home','home')->name('home')->middleware('auth');
 

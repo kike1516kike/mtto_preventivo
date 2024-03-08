@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     @vite (['resources/css/app.scss', 'resources/js/app.js'])
-    
+
 </head>
-<body>
+<body oncopy="return false;" onselectstart="return false;" class="bg-dark text-white">
 
     @include('layouts.navigation')
 

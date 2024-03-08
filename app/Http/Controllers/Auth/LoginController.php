@@ -13,47 +13,40 @@ use App\Models\User;
 class LoginController extends Controller
 {
     public function index(){
+
         return view('auth.login');
     }
 
-    public function login(LoginRequest $request){     
-        // if (Auth::attempt($credentials, $remember)) {
 
-                //     $request->session()->regenerate();
+    public function login(LoginRequest $request)
+    {
+        // Verificar si el usuario ya está autenticado
+        if (Auth::check()) {
 
-                //     return redirect()
-                //         ->intended('dashboard')
-                //         ->with('status', 'Logueo con exito');
-
-                // }
-
-        $credentials = $request->validated();
+            return redirect()->route('home'); // Redirigir al home si ya está autenticado
+        }
 
         $user = User::where('usuario', $request->usuario)->first();
-        // if ($user && $user->password === md5($request->password)){
-        //     Auth::login($user);
-        //     $user->update(['password' => Hash::make($request->password)]);
-        //     $request->session()->regenerate();
-        //     return redirect()
-        //         ->intended('home')
-        //         ->with('status', 'Logueo con éxito');
-        // }
-        if ($user && Hash::check($request->password, $user->password)){
+
+        if ($user && Hash::check($request->password, $user->password)) {
             Auth::login($user);
             $request->session()->regenerate();
 
             return redirect()
-                ->intended('home')
+                ->route('home')
                 ->with('status', 'Logueo con éxito');
-
         }
-  
+
         throw ValidationException::withMessages([
             'usuario' => ['Estas credenciales no coinciden con nuestros registros'],
         ]);
     }
 
+
+
+
     public function logout(Request $request){
+
         Auth::logout();
 
         $request->session()->invalidate();
@@ -61,6 +54,8 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+
+
     }
 
 }
