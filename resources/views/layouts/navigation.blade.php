@@ -24,8 +24,11 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
+            <form style="display: inline;" action="/logout" method="POST" id="logoutForm">
+                @csrf
+                <a class="nav-link" href="#" onclick="logout()">Logout</a>
+            </form>
+        </li>
         </ul>
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -35,3 +38,9 @@
     </div>
   </nav>
 
+  <script>
+    function logout() {
+        event.preventDefault(); // Evitar el comportamiento predeterminado del enlace
+        document.getElementById('logoutForm').submit(); // Enviar el formulario
+    }
+</script>

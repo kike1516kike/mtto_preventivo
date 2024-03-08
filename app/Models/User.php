@@ -20,8 +20,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'usuario_credencial',
-        'password_credencial',
+        'usuario',
+        'password',
     ];
 
     /**
@@ -30,8 +30,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password_credencial',
-        'remember_token',
+        'password',
+        
     ];
 
     /**
@@ -40,7 +40,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'password_credencial' => 'hashed',
+        'password' => 'hashed',
 
     ];
 }

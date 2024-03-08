@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('credenciales', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('usuario_credencial');
-            $table->string('password_credencial');
+            $table->string('usuario')->nullable(); ;
+            $table->string('password')->nullable(); 
 
-            $table->datetime('fecha_registro');
-            $table->string('usuario_registro', 50);
-            $table->boolean('eliminado');
-            $table->string('usuario_eliminado', 50);
-            $table->datetime('fecha_modifica');
-            $table->string('usuario_modifica', 50);
+            $table->datetime('fecha_registro')->nullable(); 
+            $table->string('usuario_registro', 50)->nullable(); 
+            $table->boolean('eliminado')->nullable(); 
+            $table->string('usuario_eliminado', 50)->nullable(); 
+            $table->datetime('fecha_modifica')->nullable(); 
+            $table->string('usuario_modifica', 50)->nullable(); 
 
-            $table->unsignedInteger('id_perfil');
+            $table->unsignedInteger('id_perfil')->nullable(); 
             $table->foreign('id_perfil')->references('id_perfil')->on('perfiles')->onDelete('cascade');
 
             $table->timestamps();

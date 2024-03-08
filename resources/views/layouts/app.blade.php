@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     @vite (['resources/css/app.scss', 'resources/js/app.js'])
+    
 </head>
 <body>
 
     @include('layouts.navigation')
 
     @yield('content')
-
+    <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

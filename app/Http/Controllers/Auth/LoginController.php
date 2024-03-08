@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use App\Http\Requests\LoginRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -12,35 +16,51 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    // public function login(LoginRequest $request){
+    public function login(LoginRequest $request){     
+        // if (Auth::attempt($credentials, $remember)) {
 
-    //     $credentials = $request->validated();
+                //     $request->session()->regenerate();
 
-    //     $remember = $request->filled('remember');
+                //     return redirect()
+                //         ->intended('dashboard')
+                //         ->with('status', 'Logueo con exito');
 
-    //     if (Auth::attempt($credentials, $remember)) {
+                // }
 
-    //         $request->session()->regenerate();
+        $credentials = $request->validated();
 
-    //         return redirect()
-    //             ->intended('home')
-    //             ->with('status', 'Logueo con exito');
+        $user = User::where('usuario', $request->usuario)->first();
+        // if ($user && $user->password === md5($request->password)){
+        //     Auth::login($user);
+        //     $user->update(['password' => Hash::make($request->password)]);
+        //     $request->session()->regenerate();
+        //     return redirect()
+        //         ->intended('home')
+        //         ->with('status', 'Logueo con éxito');
+        // }
+        if ($user && Hash::check($request->password, $user->password)){
+            Auth::login($user);
+            $request->session()->regenerate();
 
-    //     }
+            return redirect()
+                ->intended('home')
+                ->with('status', 'Logueo con éxito');
 
-    //     throw ValidationException::withMessages([
-    //         'email' => ['Estas credenciales no coinciden con nuestros registros'],
-    //     ]);
-    // }
+        }
+  
+        throw ValidationException::withMessages([
+            'usuario' => ['Estas credenciales no coinciden con nuestros registros'],
+        ]);
+    }
 
-    // public function logout(Request $request){
-    //     Auth::logout();
+    public function logout(Request $request){
+        Auth::logout();
 
-    //     $request->session()->invalidate();
+        $request->session()->invalidate();
 
-    //     $request->session()->regenerateToken();
+        $request->session()->regenerateToken();
 
-    //     return redirect()->route('login');
-    // }
+        return redirect()->route('login');
+    }
 
 }
