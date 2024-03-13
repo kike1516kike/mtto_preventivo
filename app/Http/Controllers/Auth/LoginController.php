@@ -12,17 +12,15 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    public function index(){
-
+    public function index()
+    {
         return view('auth.login');
     }
-
 
     public function login(LoginRequest $request)
     {
         // Verificar si el usuario ya está autenticado
         if (Auth::check()) {
-
             return redirect()->route('home'); // Redirigir al home si ya está autenticado
         }
 
@@ -32,9 +30,7 @@ class LoginController extends Controller
             Auth::login($user);
             $request->session()->regenerate();
 
-            return redirect()
-                ->route('home')
-                ->with('status', 'Logueo con éxito');
+            return redirect()->route('home')->with('status', 'Logueo con éxito');
         }
 
         throw ValidationException::withMessages([
@@ -42,11 +38,8 @@ class LoginController extends Controller
         ]);
     }
 
-
-
-
-    public function logout(Request $request){
-
+    public function logout(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();
@@ -54,8 +47,5 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
-
-
     }
-
 }
