@@ -31,7 +31,7 @@
             @enderror
         </div>
         <!-- Agrega más campos según sea necesario -->
-
+        <br>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Cancelar</a>

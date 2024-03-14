@@ -29,6 +29,7 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+        <br>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="{{ route('usuarios.index') }}" class="btn btn-secondary">Cancelar</a>

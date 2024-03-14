@@ -13,28 +13,28 @@ return new class extends Migration
     {
         Schema::create('equipos_mtto', function (Blueprint $table) {
             $table->increments('id_equipo_mtto');
-            $table->string('nombre_equipo_mtto', 75);
-            $table->datetime('fecha_ingreso_equipo_mtto');
-            $table->string('cod_act_fijo_equipo_mtto', 20);
-            $table->string('ubicacion_equipo', 100);
-            $table->string('tipo_equipo_mtto', 25);
-            $table->string('marca_equipo_mtto', 100);
-            $table->string('modelo_equipo_mtto', 100);
-            $table->string('sitema_operativo_equipo_mtto', 100);
-            $table->string('voffice_equipo_mtto');
-            $table->integer('ram_equipo_mtto');
-            $table->string('procesador_equipo_mtto', 100);
-            $table->string('disco_equipo_mtto', 100);
-            $table->boolean('estado_equipo_mtto');
-            $table->integer('ip_equipo_mtto');
-            $table->string('observacion_equipo_mtto');
+            $table->string('nombre_equipo_mtto', 75)->nullable();
+            $table->datetime('fecha_ingreso_equipo_mtto')->nullable();
+            $table->string('cod_act_fijo_equipo_mtto', 20)->nullable();
+            $table->string('ubicacion_equipo', 100)->nullable();
+            $table->string('tipo_equipo_mtto', 25)->nullable();
+            $table->string('marca_equipo_mtto', 100)->nullable();
+            $table->string('modelo_equipo_mtto', 100)->nullable();
+            $table->string('sitema_operativo_equipo_mtto', 100)->nullable();
+            $table->string('voffice_equipo_mtto')->nullable();
+            $table->integer('ram_equipo_mtto')->nullable();
+            $table->string('procesador_equipo_mtto', 100)->nullable();
+            $table->string('disco_equipo_mtto', 100)->nullable();
+            $table->boolean('estado_equipo_mtto')->nullable();
+            $table->integer('ip_equipo_mtto')->nullable();
+            $table->string('observacion_equipo_mtto')->nullable();
 
-            $table->datetime('fecha_registro');
-            $table->string('usuario_registro', 50);
-            $table->boolean('eliminado');
-            $table->string('usuario_eliminado', 50);
-            $table->datetime('fecha_modifica');
-            $table->string('usuario_modifica', 50);
+            $table->datetime('fecha_registro')->nullable();
+            $table->string('usuario_registro', 50)->nullable();
+            $table->boolean('eliminado')->nullable();
+            $table->string('usuario_eliminado', 50)->nullable();
+            $table->datetime('fecha_modifica')->nullable();
+            $table->string('usuario_modifica', 50)->nullable()->nullable();
 
             $table->unsignedInteger('id_mantenimiento');
             $table->foreign('id_mantenimiento')->references('id_mantenimiento')->on('mantenimientos')->onDelete('cascade');

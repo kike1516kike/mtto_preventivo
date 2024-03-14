@@ -52,9 +52,9 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Usuarios $usuarios)
+    public function show(User $usuario)
     {
-        //
+        return view('usuarios.view', compact('usuario'));
     }
 
     /**
@@ -70,32 +70,31 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    $usuario = User::find($id);
+    {
+        $usuario = User::find($id);
 
-    $request->validate([
-        'usuario' => 'required|string|max:255',
-        'rol' => 'required|integer',
-        'password' => 'nullable|string|min:8',
-        // Agrega más validaciones según sea necesario
-    ]);
-
-    $usuario->update([
-        'usuario' => $request->usuario,
-        'rol' => $request->rol,
-        // Actualiza otros campos aquí según sea necesario
-    ]);
-
-    // Si se proporciona una nueva contraseña, la actualizamos
-    if ($request->filled('password')) {
-        $usuario->update([
-            'password' => bcrypt($request->password),
+        $request->validate([
+            'usuario' => 'required|string|max:255',
+            'rol' => 'required|integer',
+            'password' => 'nullable|string|min:8',
+            // Agrega más validaciones según sea necesario
         ]);
+
+        $usuario->update([
+            'usuario' => $request->usuario,
+            'rol' => $request->rol,
+            // Actualiza otros campos aquí según sea necesario
+        ]);
+
+        // Si se proporciona una nueva contraseña, la actualizamos
+        if ($request->filled('password')) {
+            $usuario->update([
+                'password' => bcrypt($request->password),
+            ]);
+        }
+
+        return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
     }
-
-    return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
-}
-
 
     /**
      * Remove the specified resource from storage.

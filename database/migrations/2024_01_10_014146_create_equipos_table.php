@@ -13,24 +13,24 @@ return new class extends Migration
     {
         Schema::create('equipos', function (Blueprint $table) {
             $table->increments('id_equipo');
-            $table->string('nombre_equipo', 75);
-            $table->datetime('fecha_ingreso_equipo');
-            $table->string('cod_act_fijo_equipo', 20);
-            $table->string('tipo_equipo', 25);
-            $table->string('modelo_equipo', 100);
-            $table->string('sitema_operativo_equipo', 100);
-            $table->integer('ram_equipo');
-            $table->string('procesador_equipo', 100);
-            $table->string('disco_equipo', 100);
-            $table->boolean('estado_equipo');
-            $table->integer('ip_equipo');
+            $table->string('nombre_equipo', 75)->nullable();
+            $table->datetime('fecha_ingreso_equipo')->nullable();
+            $table->string('cod_act_fijo_equipo', 20)->nullable();
+            $table->string('tipo_equipo', 25)->nullable();
+            $table->string('modelo_equipo', 100)->nullable();
+            $table->string('sitema_operativo_equipo', 100)->nullable();
+            $table->integer('ram_equipo')->nullable();
+            $table->string('procesador_equipo', 100)->nullable();
+            $table->string('disco_equipo', 100)->nullable();
+            $table->boolean('estado_equipo')->nullable();
+            $table->integer('ip_equipo')->nullable();
 
-            $table->datetime('fecha_registro');
-            $table->string('usuario_registro', 50);
-            $table->boolean('eliminado');
-            $table->string('usuario_eliminado', 50);
-            $table->datetime('fecha_modifica');
-            $table->string('usuario_modifica', 50);
+            $table->datetime('fecha_registro')->nullable();
+            $table->string('usuario_registro', 50)->nullable();
+            $table->boolean('eliminado')->nullable();
+            $table->string('usuario_eliminado', 50)->nullable();
+            $table->datetime('fecha_modifica')->nullable();
+            $table->string('usuario_modifica', 50)->nullable();
 
             $table->unsignedInteger('id_marca');
             $table->foreign('id_marca')->references('id_marca')->on('marcas')->onDelete('cascade');

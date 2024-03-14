@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('perifericos_mtto', function (Blueprint $table) {
             $table->increments('id_periferico_mtto');
-            $table->string('tipo_periferico_mtto', 100); 
+            $table->string('tipo_periferico_mtto', 100)->nullable(); 
 
             $table->unsignedInteger('id_equipo_mtto');
             $table->foreign('id_equipo_mtto')->references('id_equipo_mtto')->on('equipos_mtto')->onDelete('cascade');

@@ -10,24 +10,25 @@
     <div class="table-responsive">
         <table class="table table-dark table-striped">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th scope="col">#</th>
                     <th scope="col">Usuario</th>
                     <th scope="col">Rol</th>
                     <th scope="col" class="d-none d-sm-table-cell">Perfil</th>
-                    <th scope="col">Acciones</th>
+                    <th scope="col" >Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($usuarios as $usuario)
                 <tr>
-                    <th scope="row">{{ $usuario->id }}</th>
+                    <th  scope="row" class="text-center">{{ $usuario->id }}</th>
                     <td>{{ $usuario->usuario }}</td>
-                    <td>{{ $usuario->rol }}</td>
+                    <td class="text-center">{{ $usuario->rol }}</td>
                     <td class="d-none d-sm-table-cell">{{ $usuario->perfil }}</td>
-                    <td>
+                    <td class="text-center">
                         <a href="{{ route('usuarios.edit', $usuario) }}" class="btn btn-primary btn-sm">Editar</a>
-                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-route="{{ route('usuarios.destroy', $usuario) }}">Eliminar</button>
+                        <a href="{{ route('usuarios.show', $usuario) }}" class="btn btn-info btn-sm">Ver</a>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" >Eliminar</button>
                     </td>
                 </tr>
                 @endforeach
@@ -82,9 +83,9 @@
                 ¿Estás seguro de que deseas eliminar este usuario?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                 <!-- Form for deletion -->
-                <form action="" method="post" id="deleteForm" class="frmDelete">
+                <form action="{{ route('usuarios.destroy', $usuario) }}" method="post" id="deleteForm" class="frmDelete">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

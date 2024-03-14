@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('ubicaciones', function (Blueprint $table) {
             $table->increments('id_ubicacion');
-            $table->string('nombre_ubicacion', 50);
+            $table->string('nombre_ubicacion', 50)->nullable();
 
-            $table->datetime('fecha_registro');
-            $table->string('usuario_registro', 50);
-            $table->boolean('eliminado');
-            $table->string('usuario_eliminado', 50);
-            $table->datetime('fecha_modifica');
-            $table->string('usuario_modifica', 50);
+            $table->datetime('fecha_registro')->nullable();
+            $table->string('usuario_registro', 50)->nullable();
+            $table->boolean('eliminado')->nullable();
+            $table->string('usuario_eliminado', 50)->nullable();
+            $table->datetime('fecha_modifica')->nullable();
+            $table->string('usuario_modifica', 50)->nullable();
 
             $table->timestamps();
         });

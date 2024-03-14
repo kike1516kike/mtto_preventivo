@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('criterios', function (Blueprint $table) {
             $table->increments('id_criterio');
-            $table->string('nombre_criterio');
-            $table->boolean('software_criterio');
+            $table->string('nombre_criterio')->nullable();
+            $table->boolean('software_criterio')->nullable();
             
             $table->timestamps();
         });

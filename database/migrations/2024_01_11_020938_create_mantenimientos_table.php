@@ -13,23 +13,23 @@ return new class extends Migration
     {
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->increments('id_mantenimiento');
-            $table->datetime('fecha_mantenimiento');
-            $table->string('trimestre_mantenimiento', 75);
-            $table->integer('cod_empleado_mtto');
-            $table->string('nombres_mtto', 100);
-            $table->string('apellidos_mtto', 100);
-            $table->string('cargo_mtto', 100);
-            $table->string('observacion_mtto');
-            $table->integer('cod_usuario_firma');
-            $table->string('nombre_usuario_firma', 100);
-            $table->string('password_usuario_firma', 100);
-            $table->integer('cod_jefe_firma');
-            $table->string('nombre_jefe_firma', 100);
-            $table->string('password_jefe_firma', 100);
-            $table->integer('cod_auxi_firma');
-            $table->string('nombre_auxi_firma', 100);
-            $table->string('password_auxi_firma', 100);
-            $table->boolean('finalizado_mtto');
+            $table->datetime('fecha_mantenimiento')->nullable();
+            $table->string('trimestre_mantenimiento', 75)->nullable();
+            $table->integer('cod_empleado_mtto')->nullable();
+            $table->string('nombres_mtto', 100)->nullable();
+            $table->string('apellidos_mtto', 100)->nullable();
+            $table->string('cargo_mtto', 100)->nullable();
+            $table->string('observacion_mtto')->nullable();
+            $table->integer('cod_usuario_firma')->nullable();
+            $table->string('nombre_usuario_firma', 100)->nullable();
+            $table->string('password_usuario_firma', 100)->nullable();
+            $table->integer('cod_jefe_firma')->nullable();
+            $table->string('nombre_jefe_firma', 100)->nullable();
+            $table->string('password_jefe_firma', 100)->nullable();
+            $table->integer('cod_auxi_firma')->nullable();
+            $table->string('nombre_auxi_firma', 100)->nullable();
+            $table->string('password_auxi_firma', 100)->nullable();
+            $table->boolean('finalizado_mtto')->nullable();
             
             $table->timestamps();
         });
