@@ -6,9 +6,9 @@
     <div class="container">
 
         <h1>Listado de Marcas</h1>
-        <a href="" class="btn btn-primary mb-3">Crear Nueva Marca</a>
+        <a href="{{ route('marcas.create') }}" class="btn btn-success mb-3">Crear Nueva Marca</a>
         <div class="table-responsive">
-            <table class="table table-dark table-striped">
+            <table class="table table-WHITE table-striped">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
@@ -17,18 +17,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($marcas as $marca)
+                    @forelse ($marcas as $marca)
                         <tr>
                             <td scope="row" class="text-center">{{ $marca->id_marca }}</td>
                             <td class="text-center">{{ $marca->nombre_marca }}</td>
                             <td class="text-center">
-                                <a href="" class="btn btn-primary btn-sm">Editar</a>
-                                <a href="" class="btn btn-info btn-sm">Ver</a>
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#confirDeleteModal">Eliminar</button>
+                                <a href="{{ route('marcas.edit', $marca) }}" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="{{ route('marcas.show', $marca) }}" class="btn btn-info btn-sm">Ver</a>
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $marca->id }}">Eliminar</button>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center">No hay marcas registradas.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
@@ -69,10 +72,42 @@
         </div>
     </div>
 
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-        
+    <!-- Modal -->
+    @foreach ($marcas as $marca)
+    <div class="modal fade" id="confirmDeleteModal{{ $marca->id_marca }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ $marca->id_marca }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="confirmDeleteModalLabel{{ $marca->id_marca }}">Eliminar Marca</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-dark">
+                    ¿Estás seguro de que deseas eliminar esta marca?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <!-- Form for deletion -->
+                    <form action="{{ route('marcas.destroy', $marca) }}" method="post" id="deleteForm{{ $marca->id_marca }}" class="frmDelete">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+    @endforeach
 
+@endsection
 
-
+@section('scripts')
+<script>
+    var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+    confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var route = button.getAttribute('data-route');
+        var form = confirmDeleteModal.querySelector('#deleteForm');
+        form.action = route;
+    });
+</script>
 @endsection

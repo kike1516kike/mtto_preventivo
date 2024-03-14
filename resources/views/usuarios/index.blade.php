@@ -6,9 +6,9 @@
 
 <div class="container">
     <h1>Lista de Usuarios</h1>
-    <a href="{{ route('usuarios.create') }}" class="btn btn-primary mb-3">Crear Nuevo Usuario</a>
+    <a href="{{ route('usuarios.create') }}" class="btn btn-success mb-3">Crear Nuevo Usuario</a>
     <div class="table-responsive">
-        <table class="table table-dark table-striped">
+        <table class="table table-white table-striped">
             <thead>
                 <tr class="text-center">
                     <th scope="col">#</th>
