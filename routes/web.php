@@ -6,6 +6,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\VofficeController;
+use App\Http\Controllers\PerfilController;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['guest'])->group(function () {
@@ -45,13 +46,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/ubicaciones/{ubicacion}', [UbicacionController::class, 'destroy'])->name('ubicaciones.destroy');
 
     /*RUTAS DE Voffice*/
-    Route::get('/Voffices', [VofficeController::class, 'index'])->name('voffices.index');
-    Route::get('/Voffices/create', [VofficeController::class, 'create'])->name('voffices.create');
-    Route::post('/Voffices', [VofficeController::class, 'store'])->name('voffices.store');
-    Route::get('/Voffices/{voffice}/view', [VofficeController::class, 'show'])->name('voffices.show');
-    Route::get('/Voffices/{voffice}/edit', [VofficeController::class, 'edit'])->name('voffices.edit');
-    Route::put('/Voffices/{voffice}', [VofficeController::class, 'update'])->name('voffices.update');
-    Route::delete('/Voffices/{voffice}', [VofficeController::class, 'destroy'])->name('voffices.destroy');
+    Route::get('/voffices', [VofficeController::class, 'index'])->name('voffices.index');
+    Route::get('/voffices/create', [VofficeController::class, 'create'])->name('voffices.create');
+    Route::post('/voffices', [VofficeController::class, 'store'])->name('voffices.store');
+    Route::get('/voffices/{voffice}/view', [VofficeController::class, 'show'])->name('voffices.show');
+    Route::get('/voffices/{voffice}/edit', [VofficeController::class, 'edit'])->name('voffices.edit');
+    Route::put('/voffices/{voffice}', [VofficeController::class, 'update'])->name('voffices.update');
+    Route::delete('/voffices/{voffice}', [VofficeController::class, 'destroy'])->name('voffices.destroy');
+
+    /*RUTAS DE Perfil*/
+    Route::get('/perfiles', [PerfilController::class, 'index'])->name('perfiles.index');
+    Route::get('/perfiles/create', [PerfilController::class, 'create'])->name('perfiles.create');
+    Route::post('/perfiles', [PerfilController::class, 'store'])->name('perfiles.store');
+    Route::get('/perfiles/{perfil}/view', [PerfilController::class, 'show'])->name('perfiles.show');
+    Route::get('/perfiles/{perfil}/edit', [PerfilController::class, 'edit'])->name('perfiles.edit');
+    Route::put('/perfiles/{perfil}', [PerfilController::class, 'update'])->name('perfiles.update');
+    Route::delete('/perfiles/{perfil}', [PerfilController::class, 'destroy'])->name('perfiles.destroy');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

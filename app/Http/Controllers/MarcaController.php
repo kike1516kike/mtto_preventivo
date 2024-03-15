@@ -8,6 +8,28 @@ use Illuminate\Http\Request;
 class MarcaController extends Controller
 {
     /**
+     * Validate the incoming request.
+     */
+    private function validar(Request $request)
+    {
+        $request->validate([
+            'nombre_marca' => 'required|string|max:255',
+            // Agrega más validaciones según sea necesario
+        ]);
+    }
+
+    /**
+     * Get the brand data from the request.
+     */
+    private function getMarcaData(Request $request)
+    {
+        return $request->only([
+            'nombre_marca',
+            // Agrega más campos según sea necesario
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -29,13 +51,11 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre_marca' => 'required|string|max:255',
-        ]);
+        $this->validar($request);
 
-        Marca::create([
-            'nombre_marca' => $request->nombre_marca,
-        ]);
+        $marcaData = $this->getMarcaData($request);
+
+        Marca::create($marcaData);
 
         return redirect()->route('marcas.index')->with('success', 'Marca creada correctamente');
     }
@@ -48,7 +68,6 @@ class MarcaController extends Controller
         return view('marcas.view', compact('marca'));
     }
 
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -60,22 +79,15 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $marca)
+    public function update(Request $request, Marca $marca)
     {
-        $marca = Marca::find($marca);
+        $this->validar($request);
 
-        $request->validate([
-            'nombre_marca' => 'required|string|max:255',
-            // Agrega más validaciones según sea necesario
-        ]);
+        $marcaData = $this->getMarcaData($request);
 
-        $marca->update([
-            'nombre_marca' => $request->nombre_marca,
+        $marca->update($marcaData);
 
-            // Actualiza otros campos aquí según sea necesario
-        ]);
-
-        return redirect()->route('marcas.index')->with('success', 'Usuario actualizado exitosamente.');
+        return redirect()->route('marcas.index')->with('success', 'Marca actualizada exitosamente.');
     }
 
     /**

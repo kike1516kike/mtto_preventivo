@@ -4,12 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
+    /**
+     * Validate the incoming request.
+     */
+    private function validar(Request $request)
+    {
+        $request->validate([
+            'usuario' => 'required|string|max:255',
+            'rol' => 'required|integer',
+            'password' => 'nullable|string|min:8',
+            // Agrega más validaciones según sea necesario
+        ]);
+    }
+
+    /**
+     * Get the user data from the request.
+     */
+    private function getUserData(Request $request)
+    {
+        $userData = [
+            'usuario' => $request->usuario,
+            'rol' => $request->rol,
+            // Agrega más campos según sea necesario
+        ];
+
+        // Si se proporciona una contraseña, la agregamos a los datos
+        if ($request->filled('password')) {
+            $userData['password'] = Hash::make($request->password);
+        }
+
+        return $userData;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -32,23 +62,15 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'usuario' => 'required|string|max:255',
-            'password' => 'required|string|min:8',
-            'rol' => 'required|integer',
+        $this->validar($request);
 
-            // Otras validaciones necesarias
-        ]);
+        $userData = $this->getUserData($request);
 
-        $usuario = new User();
-        $usuario->usuario = $request->usuario;
-        $usuario->rol = $request->rol;
-        $usuario->password = Hash::make($request->password);
-        // Puedes asignar otros campos si es necesario
-        $usuario->save();
+        User::create($userData);
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente');
     }
+
     /**
      * Display the specified resource.
      */
@@ -60,38 +82,21 @@ class UsuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(User $usuario)
     {
-        $usuario = User::find($id);
         return view('usuarios.edit', compact('usuario'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $usuario)
     {
-        $usuario = User::find($id);
+        $this->validar($request);
 
-        $request->validate([
-            'usuario' => 'required|string|max:255',
-            'rol' => 'required|integer',
-            'password' => 'nullable|string|min:8',
-            // Agrega más validaciones según sea necesario
-        ]);
+        $userData = $this->getUserData($request);
 
-        $usuario->update([
-            'usuario' => $request->usuario,
-            'rol' => $request->rol,
-            // Actualiza otros campos aquí según sea necesario
-        ]);
-
-        // Si se proporciona una nueva contraseña, la actualizamos
-        if ($request->filled('password')) {
-            $usuario->update([
-                'password' => bcrypt($request->password),
-            ]);
-        }
+        $usuario->update($userData);
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
     }
@@ -99,9 +104,8 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
-        $usuario = User::find($id);
         $usuario->delete();
 
         return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado correctamente');

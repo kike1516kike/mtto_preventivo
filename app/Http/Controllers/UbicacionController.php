@@ -8,6 +8,28 @@ use Illuminate\Http\Request;
 class UbicacionController extends Controller
 {
     /**
+     * Validate the incoming request.
+     */
+    private function validar(Request $request)
+    {
+        $request->validate([
+            'nombre_ubicacion' => 'required|string|max:255',
+            // Agrega más validaciones según sea necesario
+        ]);
+    }
+
+    /**
+     * Get the location data from the request.
+     */
+    private function getUbicacionData(Request $request)
+    {
+        return $request->only([
+            'nombre_ubicacion',
+            // Agrega más campos según sea necesario
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -29,15 +51,13 @@ class UbicacionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre_ubicacion' => 'required|string|max:255',
-        ]);
+        $this->validar($request);
 
-        Ubicacion::create([
-            'nombre_ubicacion' => $request->nombre_ubicacion,
-        ]);
+        $ubicacionData = $this->getUbicacionData($request);
 
-        return redirect()->route('ubicaciones.index')->with('success', 'Ubicacion creada correctamente');
+        Ubicacion::create($ubicacionData);
+
+        return redirect()->route('ubicaciones.index')->with('success', 'Ubicación creada correctamente');
     }
 
     /**
@@ -61,31 +81,23 @@ class UbicacionController extends Controller
      */
     public function update(Request $request, Ubicacion $ubicacion)
     {
-        // $ubicacion = Ubicacion::find($ubicacion);
+        $this->validar($request);
 
-        $request->validate([
-            'nombre_ubicacion' => 'required|string|max:255',
-            // Agrega más validaciones según sea necesario
-        ]);
+        $ubicacionData = $this->getUbicacionData($request);
 
-        $ubicacion->update([
-            'nombre_ubicacion' => $request->nombre_ubicacion,
-            // Actualiza otros campos aquí según sea necesario
-        ]);
+        $ubicacion->update($ubicacionData);
 
-
-
-        return redirect()->route('ubicaciones.index')->with('success', 'Ubicacion actualizada exitosamente.');
+        return redirect()->route('ubicaciones.index')->with('success', 'Ubicación actualizada exitosamente.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id_ubicacion)
+    public function destroy($id_ubicacion)
     {
         $ubicacion = Ubicacion::find($id_ubicacion);
         $ubicacion->delete();
 
-        return redirect()->route('ubicaciones.index')->with('success', 'Ubicacion eliminada correctamente');
+        return redirect()->route('ubicaciones.index')->with('success', 'Ubicación eliminada correctamente');
     }
 }

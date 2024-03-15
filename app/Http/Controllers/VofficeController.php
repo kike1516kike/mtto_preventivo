@@ -8,6 +8,26 @@ use Illuminate\Http\Request;
 class VofficeController extends Controller
 {
     /**
+     * Validate the incoming request.
+     */
+    private function validar(Request $request)
+    {
+        $request->validate([
+            'nombre_office' => 'required|string|max:255',
+        ]);
+    }
+
+    /**
+     * Get the office data from the request.
+     */
+    private function getOfficeData(Request $request)
+    {
+        return $request->only([
+            'nombre_office',
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -29,15 +49,13 @@ class VofficeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre_office' => 'required|string|max:255',
-        ]);
+        $this->validar($request);
 
-        Voffice::create([
-            'nombre_office' => $request->nombre_office,
-        ]);
+        $officeData = $this->getOfficeData($request);
 
-        return redirect()->route('voffices.index')->with('success', 'Version de Office creada correctamente');
+        Voffice::create($officeData);
+
+        return redirect()->route('voffices.index')->with('success', 'Versión de Office creada correctamente');
     }
 
     /**
@@ -61,19 +79,13 @@ class VofficeController extends Controller
      */
     public function update(Request $request, Voffice $voffice)
     {
-        // $ubicacion = Ubicacion::find($ubicacion);
+        $this->validar($request);
 
-        $request->validate([
-            'nombre_office' => 'required|string|max:255',
-            // Agrega más validaciones según sea necesario
-        ]);
+        $officeData = $this->getOfficeData($request);
 
-        $voffice->update([
-            'nombre_office' => $request->nombre_office,
-            // Actualiza otros campos aquí según sea necesario
-        ]);
+        $voffice->update($officeData);
 
-        return redirect()->route('voffices.index')->with('success', 'Version de Offices actualizada exitosamente.');
+        return redirect()->route('voffices.index')->with('success', 'Versión de Office actualizada exitosamente.');
     }
 
     /**
@@ -84,6 +96,6 @@ class VofficeController extends Controller
         $voffice = Voffice::find($id_office);
         $voffice->delete();
 
-        return redirect()->route('voffices.index')->with('success', 'Version de Office eliminada correctamente');
+        return redirect()->route('voffices.index')->with('success', 'Versión de Office eliminada correctamente');
     }
 }

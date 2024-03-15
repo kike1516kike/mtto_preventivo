@@ -24,7 +24,7 @@
                             <td class="text-center">
                                 <a href="{{ route('marcas.edit', $marca) }}" class="btn btn-primary btn-sm">Editar</a>
                                 <a href="{{ route('marcas.show', $marca) }}" class="btn btn-info btn-sm">Ver</a>
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $marca->id }}">Eliminar</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $marca->id_marca }}">Eliminar</button>
                             </td>
                         </tr>
                     @empty
