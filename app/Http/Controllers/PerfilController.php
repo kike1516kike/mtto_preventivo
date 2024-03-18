@@ -32,7 +32,7 @@ class PerfilController extends Controller
             'nombres_perfil' => 'required|string|max:100',
             'apellidos_perfil' => 'required|string|max:100',
             'cargo_perfil' => 'required|string|max:100',
-            'estado_perfil' => 'required|boolean',
+            'estado_perfil' => 'boolean',
             'observacion_perfil' => 'required|string|max:255',
         ]);
     }

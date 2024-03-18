@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('perfiles', function (Blueprint $table) {
             $table->increments('id_perfil');
-            $table->integer('cod_empleado_perfil')->nullable();
+            $table->integer('cod_empleado')->nullable();
             $table->string('nombres_perfil', 100)->nullable();
             $table->string('apellidos_perfil', 100)->nullable();
             $table->string('cargo_perfil', 100)->nullable();
