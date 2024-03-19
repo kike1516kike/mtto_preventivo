@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cod_act_fijo_equipo', 20)->nullable();
             $table->string('tipo_equipo', 25)->nullable();
             $table->string('modelo_equipo', 100)->nullable();
-            $table->string('sitema_operativo_equipo', 100)->nullable();
+            $table->string('sistema_operativo_equipo', 100)->nullable();
             $table->integer('ram_equipo')->nullable();
             $table->string('procesador_equipo', 100)->nullable();
             $table->string('disco_equipo', 100)->nullable();
@@ -32,13 +32,13 @@ return new class extends Migration
             $table->datetime('fecha_modifica')->nullable();
             $table->string('usuario_modifica', 50)->nullable();
 
-            $table->unsignedInteger('id_marca');
+            $table->unsignedInteger('id_marca')->nullable();;
             $table->foreign('id_marca')->references('id_marca')->on('marcas')->onDelete('cascade');
-            $table->unsignedInteger('id_ubicacion');
+            $table->unsignedInteger('id_ubicacion')->nullable();;
             $table->foreign('id_ubicacion')->references('id_ubicacion')->on('ubicaciones')->onDelete('cascade');
-            $table->unsignedInteger('id_office');
+            $table->unsignedInteger('id_office')->nullable();;
             $table->foreign('id_office')->references('id_office')->on('voffices')->onDelete('cascade');
-            $table->unsignedInteger('id_perfil');
+            $table->unsignedInteger('id_perfil')->nullable();;
             $table->foreign('id_perfil')->references('id_perfil')->on('perfiles')->onDelete('cascade');
 
             $table->timestamps();

@@ -12,14 +12,18 @@ class PerfilController extends Controller
      */
     private function getPerfilData(Request $request)
     {
-        return $request->only([
+
+        $perfilData = $request->only([
             'cod_empleado',
             'nombres_perfil',
             'apellidos_perfil',
             'cargo_perfil',
-            'estado_perfil',
             'observacion_perfil',
         ]);
+
+        $perfilData['estado_perfil'] = $request->has('estado_perfil');
+
+        return $perfilData;
     }
 
     /**
@@ -32,8 +36,8 @@ class PerfilController extends Controller
             'nombres_perfil' => 'required|string|max:100',
             'apellidos_perfil' => 'required|string|max:100',
             'cargo_perfil' => 'required|string|max:100',
-            'estado_perfil' => 'boolean',
-            'observacion_perfil' => 'required|string|max:255',
+            'estado_perfil',
+            'observacion_perfil' => 'max:255',
         ]);
     }
 

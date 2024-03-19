@@ -1,3 +1,6 @@
+<?php
+use Carbon\Carbon;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +11,9 @@
     {{-- @vite (['resources/css/app.scss', 'resources/js/app.js']) --}}
     <link rel="stylesheet" href="{{ asset('css/authenticated.css') }}">
 
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+    {{-- oncopy="return false;" onselectstart="return false;" class="bg-white text-white"   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
 </head>
-<body oncopy="return false;" onselectstart="return false;" class="bg-white text-white">
+<body >
 
     @include('layouts.navigation')
 
