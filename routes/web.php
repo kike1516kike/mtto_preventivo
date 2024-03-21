@@ -8,6 +8,7 @@ use App\Http\Controllers\UbicacionController;
 use App\Http\Controllers\VofficeController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\PerifericoController;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['guest'])->group(function () {
@@ -71,7 +72,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/equipos/{equipo}/view', [EquipoController::class, 'show'])->name('equipos.show');
     Route::get('/equipos/{equipo}/edit', [EquipoController::class, 'edit'])->name('equipos.edit');
     Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
-    Route::delete('/equipos/{perfil}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
+    Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
+
+     /*RUTAS DE Periferico*/
+     Route::get('/perifericos', [PerifericoController::class, 'index'])->name('perifericos.index');
+     Route::get('/perifericos/create', [PerifericoController::class, 'create'])->name('perifericos.create');
+     Route::post('/perifericos', [PerifericoController::class, 'store'])->name('perifericos.store');
+     Route::get('/perifericos/{periferico}/view', [PerifericoController::class, 'show'])->name('perifericos.show');
+     Route::get('/perifericos/{periferico}/edit', [PerifericoController::class, 'edit'])->name('perifericos.edit');
+     Route::put('/perifericos/{periferico}', [PerifericoController::class, 'update'])->name('perifericos.update');
+     Route::delete('/perifericos/{periferico}', [PerifericoController::class, 'destroy'])->name('perifericos.destroy');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

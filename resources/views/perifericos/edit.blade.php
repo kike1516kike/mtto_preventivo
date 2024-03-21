@@ -120,7 +120,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="form-group">
                 <label for="id_office">Versión de Office:</label>
                 <select class="form-control @error('id_office') is-invalid @enderror" id="id_office" name="id_office">
