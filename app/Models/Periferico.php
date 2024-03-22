@@ -15,6 +15,7 @@ class Periferico extends Model
 
     protected $fillable = [
         'tipo_periferico',
+        'nombre_periferico',
         'id_perfil',
     ];
 }

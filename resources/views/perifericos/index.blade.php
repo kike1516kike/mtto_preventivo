@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Equipos')
+@section('title', 'Perifericos')
 
 @section('content')
 <div class="container">
 
-    <h1>Listado de Equipos</h1>
-    <a href="{{ route('equipos.create') }}" class="btn btn-success mb-3">Crear Nuevo Registro</a>
+    <h1>Listado de Perifericos</h1>
+    <a href="{{ route('perifericos.create') }}" class="btn btn-success mb-3">Crear Nuevo Registro</a>
     <div class="table-responsive">
         <table class="table table-WHITE table-striped">
             <thead>
@@ -23,11 +23,6 @@
                     <tr>
                         <td scope="row" class="text-center">{{ $equipo->id_equipo }}</td>
                         <td class="text-center">{{ $equipo->nombre_equipo }}</td>
-                        @if ($equipo->estado_equipo == true )
-                            <td class="text-center">Desabilitado</td>
-                        @else
-                            <td class="text-center">Habilitado</td>
-                        @endif
                         <td class="text-center">{{ $equipo->ip_equipo }}</td>
                         <td class="text-center">
                             <a href="{{ route('equipos.edit', $equipo) }}" class="btn btn-primary btn-sm">Editar</a>

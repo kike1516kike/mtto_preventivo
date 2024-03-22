@@ -12,6 +12,7 @@ class PerifericoController extends Controller
     {
         $request->validate([
             'tipo_periferico' => 'required|string|max:255',
+            'nombre_periferico' => 'required|string|max:255',
             'id_perfil' => 'required',
             // Agrega más validaciones según sea necesario
         ]);
@@ -44,6 +45,7 @@ class PerifericoController extends Controller
         $periferico = new Periferico();
 
         $periferico->tipo_periferico = $request->input('tipo_periferico');
+        $periferico->nombre_periferico = $request->input('nombre_periferico');
         $perifericos->id_perfil = $request->input('id_perfil');
 
         $periferico->save();
@@ -55,7 +57,9 @@ class PerifericoController extends Controller
      */
     public function show(Periferico $periferico)
     {
-        return view('perifericos.index', compact('periferico'));
+        $perfil = Marca::where('id_marca', $equipo->id_marca);
+        $nombre_perfil = $perfil->nombres_perfil.' '.$perfil->apellidos_perfil;
+        return view('perifericos.index', compact('periferico', 'nombre_perfil'));
     }
 
     /**
@@ -75,6 +79,7 @@ class PerifericoController extends Controller
         $this->validar($request);
 
         $periferico->tipo_periferrico = $request->input('tipo_periferico');
+        $periferico->nombre_periferico =$request->input('nombre_periferico');
         $periferico->tipo_periferico =$request->input('id_perfil');
 
         $periferico->save();

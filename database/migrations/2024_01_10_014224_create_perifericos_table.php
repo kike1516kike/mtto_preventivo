@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('perifericos', function (Blueprint $table) {
             $table->increments('id_periferico');
-            $table->string('tipo_periferico', 100)->nullable(); 
+            $table->string('tipo_periferico', 100)->nullable();
+            $table->string('nombre_periferico', 100)->nullable();
 
             $table->datetime('fecha_registro')->nullable();
             $table->string('usuario_registro', 50)->nullable();
