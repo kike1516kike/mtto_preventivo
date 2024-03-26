@@ -1,8 +1,9 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -29,6 +30,19 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        // Lógica para agregar el usuario administrador
+        $admin = new User([
+            'usuario' => 'Administrador',
+            'password' => Hash::make('User01admin'),
+            'rol' => 1,
+            'fecha_registro' => now(),
+            'usuario_registro' => 'admin',
+            'eliminado' => false,
+            'usuario_modifica' => 'admin',
+            'fecha_modifica' => now(),
+        ]);
+        $admin->save();
     }
 
     /**

@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -30,9 +29,27 @@ return new class extends Migration
             $table->string('nombre_auxi_firma', 100)->nullable();
             $table->string('password_auxi_firma', 100)->nullable();
             $table->boolean('finalizado_mtto')->nullable();
-            
+
             $table->timestamps();
         });
+
+        DB::unprepared('
+        CREATE TRIGGER mtto
+        ON mantenimientos
+        AFTER INSERT
+        AS
+        BEGIN
+        insert into tarea
+        Select Plantilla.nombre,
+               convert(varchar,DATEADD(day,Diadesde,convert(datetime,inserted.FechaInicio,105)),105) as Desde,
+               convert(varchar,DATEADD(day,DiaHasta,convert(datetime,inserted.FechaInicio,105)),105) as Hasta,
+               idResponsable,
+               inserted.idplann  as idPlan,
+               recurso,
+               idPlantilla as Orden
+           from Plantilla cross join inserted 
+        END
+    ');
     }
 
     /**
@@ -40,6 +57,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Eliminar el trigger antes de eliminar la tabla
+        DB::unprepared('DROP TRIGGER IF EXISTS nombre_del_trigger');
+
         Schema::dropIfExists('mantenimientos');
     }
 };
