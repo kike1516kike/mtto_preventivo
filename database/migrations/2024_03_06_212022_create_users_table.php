@@ -38,9 +38,6 @@ return new class extends Migration
             'rol' => 1,
             'fecha_registro' => now(),
             'usuario_registro' => 'admin',
-            'eliminado' => false,
-            'usuario_modifica' => 'admin',
-            'fecha_modifica' => now(),
         ]);
         $admin->save();
     }
