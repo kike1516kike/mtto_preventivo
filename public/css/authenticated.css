@@ -1,2 +1,6 @@
+
 @import url('styleAll/styleUsers.css');
 @import url('styleAll/bootstrap.min.css');
+.negro:hover {
+    color: black !important;
+    }

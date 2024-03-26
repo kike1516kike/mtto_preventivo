@@ -14,6 +14,7 @@ class PerifericoController extends Controller
             'tipo_periferico' => 'required|string|max:255',
             'nombre_periferico' => 'required|string|max:255',
             'id_perfil' => 'required',
+            'id_evento' => 'required',
             // Agrega más validaciones según sea necesario
         ]);
     }
@@ -23,6 +24,7 @@ class PerifericoController extends Controller
     public function index()
     {
         $perifericos = Periferico::paginate(10);
+
         return view('perifericos.index', compact('perifericos'));
     }
 
@@ -46,7 +48,8 @@ class PerifericoController extends Controller
 
         $periferico->tipo_periferico = $request->input('tipo_periferico');
         $periferico->nombre_periferico = $request->input('nombre_periferico');
-        $perifericos->id_perfil = $request->input('id_perfil');
+        $periferico->id_perfil = $request->input('id_perfil');
+        $periferico->id_evento = $request->input('id_evento');
 
         $periferico->save();
         return redirect()->route('perifericos.index')->with('sucess', 'Periferico creado correctamente');
@@ -57,9 +60,9 @@ class PerifericoController extends Controller
      */
     public function show(Periferico $periferico)
     {
-        $perfil = Marca::where('id_marca', $equipo->id_marca);
-        $nombre_perfil = $perfil->nombres_perfil.' '.$perfil->apellidos_perfil;
-        return view('perifericos.index', compact('periferico', 'nombre_perfil'));
+        $perfil = Perfil::find($periferico->id_perfil);
+        $nombre_perfil = $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil;
+        return view('perifericos.view', compact('periferico', 'nombre_perfil'));
     }
 
     /**
@@ -68,20 +71,20 @@ class PerifericoController extends Controller
     public function edit(Periferico $periferico)
     {
         $perfiles = Perfil::all();
-        return view('perifericos.edit', compact('perfiles'));
+        return view('perifericos.edit', compact('periferico', 'perfiles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  $periferico)
+    public function update(Request $request, $periferico)
     {
         $this->validar($request);
-
-        $periferico->tipo_periferrico = $request->input('tipo_periferico');
-        $periferico->nombre_periferico =$request->input('nombre_periferico');
-        $periferico->tipo_periferico =$request->input('id_perfil');
-
+        $periferico = Periferico::find($periferico);
+        $periferico->tipo_periferico = $request->input('tipo_periferico');
+        $periferico->nombre_periferico = $request->input('nombre_periferico');
+        $periferico->id_perfil = $request->input('id_perfil');
+        $periferico->id_evento = $request->input('id_evento');
         $periferico->save();
 
         return redirect()->route('perifericos.index')->with('success', 'Periferico Actualizado con exito');
@@ -90,7 +93,7 @@ class PerifericoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $id_periferico)
+    public function destroy($id_periferico)
     {
         $periferico = Periferico::find($id_periferico);
         $periferico->delete();

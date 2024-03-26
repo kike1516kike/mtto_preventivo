@@ -159,7 +159,15 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-
+            <br>
+            <div class="form-group">
+                <label for="id_evento">Id evento:</label>
+                <input type="number" class="form-control" id="id_evento" name="id_evento" placelholder="128.100.1.?"
+                    value="{{ old('id_evento') }}">
+                @error('id_evento')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
 
             <br>
             <div class="form-group">

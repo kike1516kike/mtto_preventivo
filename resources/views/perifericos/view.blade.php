@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Ver Detalles del Equipo')
+@section('title', 'Ver Detalles del Periferico')
 
 @section('content')
 
@@ -10,50 +10,37 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header bg-dark text-white text-center">
-                        Detalles del Perfil
+                        Detalles del Periferico
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <tbody>
                                 <tr>
                                     <th scope="row" class="text-md-right">ID:</th>
-                                    <td>{{ $perfil->id_perfil }}</td>
+                                    <td>{{ $periferico->id_periferico }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" class="text-md-right">Codigo de Empleado:</th>
-                                    <td>{{ $perfil->cod_empleado }}</td>
+                                    <th scope="row" class="text-md-right">Tipo de periferico:</th>
+                                    <td>{{ $periferico->tipo_periferico }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" class="text-md-right">Nombres del Usuario:</th>
-                                    <td>{{ $perfil->nombres_perfil }}</td>
+                                    <th scope="row" class="text-md-right">Nombre del periferico:</th>
+                                    <td>{{ $periferico->nombre_periferico }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" class="text-md-right">Apellidos del Usuario:</th>
-                                    <td>{{ $perfil->apellidos_perfil }}</td>
+                                    <th scope="row" class="text-md-right">encargado:</th>
+                                    <td>{{ $nombre_perfil }}</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" class="text-md-right">Cargo del Usuario:</th>
-                                    <td>{{ $perfil->cargo_perfil }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Estado del Usuario:</th>
-                                    @if ($perfil->estado_perfil == true)
-                                        <td>Desabilitado</td>
-                                    @else
-                                        <td>Habilitado</td>
-                                    @endif
-
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Observaciones:</th>
-                                    <td>{{ $perfil->observacion_perfil }}</td>
+                                    <th scope="row" class="text-md-right">Id Evento:</th>
+                                    <td>{{ $periferico->id_evento }}</td>
                                 </tr>
                                 <!-- Agrega más campos según sea necesario -->
                             </tbody>
                         </table>
                         <div class="form-group row mb-0">
                             <div class="">
-                                <a href="{{ route('perfiles.index') }}" class="btn btn-success">Volver</a>
+                                <a href="{{ route('perifericos.index') }}" class="btn btn-success">Volver</a>
                             </div>
                         </div>
                     </div>

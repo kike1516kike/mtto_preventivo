@@ -9,6 +9,7 @@ use App\Http\Controllers\VofficeController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PerifericoController;
+use App\Http\Controllers\EventoController;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['guest'])->group(function () {
@@ -82,6 +83,15 @@ Route::middleware('auth')->group(function () {
      Route::get('/perifericos/{periferico}/edit', [PerifericoController::class, 'edit'])->name('perifericos.edit');
      Route::put('/perifericos/{periferico}', [PerifericoController::class, 'update'])->name('perifericos.update');
      Route::delete('/perifericos/{periferico}', [PerifericoController::class, 'destroy'])->name('perifericos.destroy');
+
+     /*RUTAS DE Eventos*/
+     Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+     Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
+     Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
+     Route::get('/eventos/{evento}/view', [EventoController::class, 'show'])->name('eventos.show');
+     Route::get('/eventos/{evento}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
+     Route::put('/eventos/{evento}', [EventoController::class, 'update'])->name('eventos.update');
+     Route::delete('/eventos/{evento}', [EventoController::class, 'destroy'])->name('eventos.destroy');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

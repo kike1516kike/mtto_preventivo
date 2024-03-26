@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('eventos', function (Blueprint $table) {
             $table->increments('id_evento');
             $table->string('descripcion_evento')->nullable();
-            $table->string('tipo_equipo')->nullable();
-            $table->integer('codigo_equipo')->nullable();
+            // $table->string('tipo_equipo')->nullable();
+            // $table->integer('codigo_equipo')->nullable();
             $table->datetime('fecha_registro')->nullable();
             $table->string('usuario_registro', 50)->nullable();
             $table->boolean('eliminado')->nullable();

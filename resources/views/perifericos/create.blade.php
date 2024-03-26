@@ -10,7 +10,7 @@
 
             <div class="form-group">
                 <label for="tipo_periferico">Tipo Periferico:</label>
-                <input type="date" class="form-control" id="tipo_periferico" name="tipo_periferico"
+                <input type="text" class="form-control" id="tipo_periferico" name="tipo_periferico"
                     value="{{ old('tipo_periferico') }}">
                 @error('tipo_periferico')
                     <div class="text-danger">{{ $message }}</div>
@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label for="nombre_periferico">Nombre ndel periferico:</label>
-                <input type="date" class="form-control" id="nombre_periferico" name="nombre_periferico"
+                <input type="text" class="form-control" id="nombre_periferico" name="nombre_periferico"
                     value="{{ old('nombre_periferico') }}">
                 @error('nombre_periferico')
                     <div class="text-danger">{{ $message }}</div>
@@ -42,6 +42,14 @@
                 @enderror
             </div>
             <br>
+            <div class="form-group">
+                <label for="id_evento">Id Evento:</label>
+                <input type="number" class="form-control" id="id_evento" name="id_evento"
+                    value="{{ old('id_evento') }}">
+                @error('id_evento')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
 
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Guardar</button>

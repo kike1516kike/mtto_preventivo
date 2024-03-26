@@ -120,7 +120,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
-            
+
             <div class="form-group">
                 <label for="id_office">Versión de Office:</label>
                 <select class="form-control @error('id_office') is-invalid @enderror" id="id_office" name="id_office">
@@ -180,6 +180,14 @@
                     {{ old('estado_equipo', $equipo->estado_equipo) ? 'checked' : '' }}>
                 @error('estado_equipo')
                     <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="form-group">id evento:</label>
+                <input type="text" class="form-control @error('id_evento') is-invalid @enderror" id="id_evento"
+                    name="id_evento" placeholder="128.100.1.?" value="{{ old('id_evento', $equipo->id_evento) }}">
+                @error('id_evento')
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
             <!-- Agrega más campos según sea necesario -->

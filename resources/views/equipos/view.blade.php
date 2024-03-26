@@ -18,7 +18,7 @@
                                 <tr>
                                     <th scope="row" class="text-md-right">ID:</th>
                                     <td>{{ $equipo->id_equipo }}</td>
-                                </tr>equipo
+                                </tr>
                                 <tr>
                                     <th scope="row" class="text-md-right">Fecha de ingreso:</th>
                                     <td>{{ $equipo->fecha_ingreso_equipo }}</td>
@@ -80,6 +80,10 @@
                                 <tr>
                                     <th scope="row" class="text-md-right">Ubicacion:</th>
                                     <td>{{ $nombre_ubicacion }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" class="text-md-right">Id Evento:</th>
+                                    <td>{{ $id_evento }}</td>
                                 </tr>
                                 <!-- Agrega más campos según sea necesario -->
                             </tbody>

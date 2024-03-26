@@ -29,5 +29,6 @@ class Equipo extends Model
          'id_office',
          'id_ubicacion',
          'id_perfil',
+         'id_evento',
     ];
 }
