@@ -14,7 +14,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Usuario</th>
                     <th scope="col">Rol</th>
-                    <th scope="col" class="d-none d-sm-table-cell">Perfil</th>
                     <th scope="col" >Acciones</th>
                 </tr>
             </thead>
@@ -22,9 +21,8 @@
                 @foreach($usuarios as $usuario)
                 <tr>
                     <th  scope="row" class="text-center">{{ $usuario->id }}</th>
-                    <td>{{ $usuario->usuario }}</td>
+                    <td class="text-center">{{ $usuario->usuario }}</td>
                     <td class="text-center">{{ $usuario->rol }}</td>
-                    <td class="d-none d-sm-table-cell">{{ $usuario->perfil }}</td>
                     <td class="text-center">
                         <a href="{{ route('usuarios.edit', $usuario) }}" class="btn btn-primary btn-sm">Editar</a>
                         <a href="{{ route('usuarios.show', $usuario) }}" class="btn btn-info btn-sm">Ver</a>

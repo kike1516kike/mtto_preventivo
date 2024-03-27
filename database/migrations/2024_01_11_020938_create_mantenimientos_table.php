@@ -34,22 +34,24 @@ return new class extends Migration
         });
 
         DB::unprepared('
-        CREATE TRIGGER mtto
-        ON mantenimientos
+        ALTER TRIGGER [dbo].[mtto]
+        ON [dbo].[mantenimientos]
         AFTER INSERT
         AS
         BEGIN
-        insert into tarea
-        Select Plantilla.nombre,
-               convert(varchar,DATEADD(day,Diadesde,convert(datetime,inserted.FechaInicio,105)),105) as Desde,
-               convert(varchar,DATEADD(day,DiaHasta,convert(datetime,inserted.FechaInicio,105)),105) as Hasta,
-               idResponsable,
-               inserted.idplann  as idPlan,
-               recurso,
-               idPlantilla as Orden
-           from Plantilla cross join inserted 
+            INSERT INTO detalles_mtto (criterio_detalle_mtto, software_detalle_mtto, id_mantenimiento)
+            SELECT
+                criterios.nombre_criterio,
+                criterios.software_criterio,
+                inserted.id_mantenimiento as id_mantenimiento
+
+            FROM
+                criterios
+            CROSS JOIN
+                inserted;
         END
     ');
+
     }
 
     /**

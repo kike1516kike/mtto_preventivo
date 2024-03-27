@@ -10,6 +10,7 @@ use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PerifericoController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\MantenimientoController;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['guest'])->group(function () {
@@ -92,6 +93,15 @@ Route::middleware('auth')->group(function () {
      Route::get('/eventos/{evento}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
      Route::put('/eventos/{evento}', [EventoController::class, 'update'])->name('eventos.update');
      Route::delete('/eventos/{evento}', [EventoController::class, 'destroy'])->name('eventos.destroy');
+
+     /*RUTAS DE Mantenimiento*/
+     Route::get('/mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');
+     Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create');
+     Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
+     Route::get('/mantenimientos/{mantenimiento}/view', [MantenimientoController::class, 'show'])->name('mantenimientos.show');
+     Route::get('/mantenimientos/{mantenimiento}/edit', [MantenimientoController::class, 'edit'])->name('mantenimientos.edit');
+     Route::put('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'update'])->name('mantenimientos.update');
+     Route::delete('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

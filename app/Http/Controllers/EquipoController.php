@@ -115,8 +115,8 @@ class EquipoController extends Controller
 
         $equipo->save();
 
-        return redirect()->route('equipos.index')->with('success', 'Equipo creado correctamente');    }
-
+        return redirect()->route('equipos.index')->with('success', 'Equipo creado correctamente');
+    }
     /**
      * Display the specified resource.
      */
