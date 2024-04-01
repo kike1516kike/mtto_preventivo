@@ -47,6 +47,9 @@
                         <li class="nav-item negro">
                             <a class="dropdown-item text-white" href="{{ route('eventos.index') }}">Eventos</a>
                         </li>
+                        <li class="nav-item negro">
+                            <a class="dropdown-item text-white" href="{{ route('mantenimientos.index') }}">Mantenimientos</a>
+                        </li>
 
                     </ul>
                 </li>

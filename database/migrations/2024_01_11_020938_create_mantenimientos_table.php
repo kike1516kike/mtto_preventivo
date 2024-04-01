@@ -12,7 +12,7 @@ return new class extends Migration
     {
         Schema::create('mantenimientos', function (Blueprint $table) {
             $table->increments('id_mantenimiento');
-            $table->datetime('fecha_mantenimiento')->nullable();
+            $table->date('fecha_mantenimiento')->nullable();
             $table->string('trimestre_mantenimiento', 75)->nullable();
             $table->integer('cod_empleado_mtto')->nullable();
             $table->string('nombres_mtto', 100)->nullable();
@@ -29,12 +29,13 @@ return new class extends Migration
             $table->string('nombre_auxi_firma', 100)->nullable();
             $table->string('password_auxi_firma', 100)->nullable();
             $table->boolean('finalizado_mtto')->nullable();
+            $table->date('fecha_finaliza')->nullable();
 
             $table->timestamps();
         });
 
         DB::unprepared('
-        ALTER TRIGGER [dbo].[mtto]
+        CREATE TRIGGER [dbo].[mtto]
         ON [dbo].[mantenimientos]
         AFTER INSERT
         AS

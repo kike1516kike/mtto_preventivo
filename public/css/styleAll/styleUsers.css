@@ -6,4 +6,10 @@ h1, h5, p, label{
     display: inline;
 }
 
+.table-responsive {
+    overflow-x: visible !important;
+}
 
+.negro:hover {
+    color: black !important;
+    }

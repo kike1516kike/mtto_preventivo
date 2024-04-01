@@ -100,7 +100,10 @@ Route::middleware('auth')->group(function () {
      Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
      Route::get('/mantenimientos/{mantenimiento}/view', [MantenimientoController::class, 'show'])->name('mantenimientos.show');
      Route::get('/mantenimientos/{mantenimiento}/edit', [MantenimientoController::class, 'edit'])->name('mantenimientos.edit');
+     Route::get('/mantenimientos/{mantenimiento}/criterio', [MantenimientoController::class, 'criterio'])->name('mantenimientos.criterio');
      Route::put('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'update'])->name('mantenimientos.update');
+     Route::put('/mantenimientos/{mantenimiento}/criterios', [MantenimientoController::class, 'update_criterios'])->name('mantenimientos.update_criterios');
+     Route::put('/mantenimientos/{mantenimiento}/firma_usuario', [MantenimientoController::class, 'firma_usuario'])->name('mantenimientos.firma_usuario');
      Route::delete('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

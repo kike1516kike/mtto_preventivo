@@ -74,16 +74,17 @@
             <div class="form-group">
                 <label for="tipo_equipo">Tipo de Equipo:</label>
                 <select class="form-control @error('tipo_equipo') is-invalid @enderror" id="tipo_equipo" name="tipo_equipo">
-                    <option value="Laptop" {{ old('tipo_equipo', $equipo->tipo_equipo) == 'Laptop' ? 'selected' : '' }}>
-                        Laptop</option>
-                    <option value="Escritorio"
-                        {{ old('tipo_equipo', $equipo->tipo_equipo) == 'Escritorio' ? 'selected' : '' }}>Escritorio
-                    </option>
+                    @foreach($opciones_tipo_equipo as $tipo)
+                        <option value="{{ $tipo }}" {{ old('tipo_equipo', $equipo->tipo_equipo) == $tipo ? 'selected' : '' }}>
+                            {{ $tipo }}
+                        </option>
+                    @endforeach
                 </select>
                 @error('tipo_equipo')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
 
             <div class="form-group">
                 <label for="id_marca">Marca:</label>

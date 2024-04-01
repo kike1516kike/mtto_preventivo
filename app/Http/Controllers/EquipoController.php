@@ -135,12 +135,14 @@ class EquipoController extends Controller
      */
     public function edit(Equipo $equipo)
     {
+        $opciones_tipo_equipo = ['Laptop', 'Escritorio'];
         $marcas = Marca::all();
         $voffices = Voffice::all();
         $perfiles = Perfil::all();
         $ubicaciones = Ubicacion::all();
-        return view('equipos.edit', compact('equipo', 'marcas', 'voffices', 'perfiles', 'ubicaciones'));
+        return view('equipos.edit', compact('equipo', 'opciones_tipo_equipo', 'marcas', 'voffices', 'perfiles', 'ubicaciones'));
     }
+
 
     /**
      * Update the specified resource in storage.
