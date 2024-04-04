@@ -7,9 +7,20 @@
     @include('mantenimientos.modals')
 
     <div class="container">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <h1>Listado de Mantenimientos</h1>
         <a href="{{ route('mantenimientos.create') }}" class="btn btn-success mb-3">Crear Nuevo Registro</a>
+        
         <div class="table-responsive">
             <table class="table table-WHITE table-striped">
                 <thead>
@@ -56,10 +67,16 @@
                                         {{-- <li><a class="dropdown-item"
                                             href="{{ route('mantenimientos.firmas', $mantenimiento) }}">Firmas</a>
                                         </li> --}}
-                                        <button class="dropdown-item btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#confirmSaveModal{{ $mantenimiento->id_mantenimiento }}">
+                                        <button class="dropdown-item btn btn-danger btn-sm" type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#confirmSaveModal{{ $mantenimiento->id_mantenimiento }}">
                                             Firma de Usuario
                                         </button>
-
+                                        <button class="dropdown-item btn btn-danger btn-sm" type="button"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#firmaSaveUaxiliar{{ $mantenimiento->id_mantenimiento }}">
+                                            Firma del Auxiliar
+                                        </button>
 
                                         <li><button class="dropdown-item btn btn-danger btn-sm" type="button"
                                                 data-bs-toggle="modal"

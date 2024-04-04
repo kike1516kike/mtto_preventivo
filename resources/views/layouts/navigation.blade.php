@@ -50,6 +50,9 @@
                         <li class="nav-item negro">
                             <a class="dropdown-item text-white" href="{{ route('mantenimientos.index') }}">Mantenimientos</a>
                         </li>
+                        <li class="nav-item negro">
+                            <a class="dropdown-item text-white" href="{{ route('mantenimientos.revision') }}">Revisión</a>
+                        </li>
 
                     </ul>
                 </li>

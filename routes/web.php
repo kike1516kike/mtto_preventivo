@@ -76,35 +76,38 @@ Route::middleware('auth')->group(function () {
     Route::put('/equipos/{equipo}', [EquipoController::class, 'update'])->name('equipos.update');
     Route::delete('/equipos/{equipo}', [EquipoController::class, 'destroy'])->name('equipos.destroy');
 
-     /*RUTAS DE Periferico*/
-     Route::get('/perifericos', [PerifericoController::class, 'index'])->name('perifericos.index');
-     Route::get('/perifericos/create', [PerifericoController::class, 'create'])->name('perifericos.create');
-     Route::post('/perifericos', [PerifericoController::class, 'store'])->name('perifericos.store');
-     Route::get('/perifericos/{periferico}/view', [PerifericoController::class, 'show'])->name('perifericos.show');
-     Route::get('/perifericos/{periferico}/edit', [PerifericoController::class, 'edit'])->name('perifericos.edit');
-     Route::put('/perifericos/{periferico}', [PerifericoController::class, 'update'])->name('perifericos.update');
-     Route::delete('/perifericos/{periferico}', [PerifericoController::class, 'destroy'])->name('perifericos.destroy');
+    /*RUTAS DE Periferico*/
+    Route::get('/perifericos', [PerifericoController::class, 'index'])->name('perifericos.index');
+    Route::get('/perifericos/create', [PerifericoController::class, 'create'])->name('perifericos.create');
+    Route::post('/perifericos', [PerifericoController::class, 'store'])->name('perifericos.store');
+    Route::get('/perifericos/{periferico}/view', [PerifericoController::class, 'show'])->name('perifericos.show');
+    Route::get('/perifericos/{periferico}/edit', [PerifericoController::class, 'edit'])->name('perifericos.edit');
+    Route::put('/perifericos/{periferico}', [PerifericoController::class, 'update'])->name('perifericos.update');
+    Route::delete('/perifericos/{periferico}', [PerifericoController::class, 'destroy'])->name('perifericos.destroy');
 
-     /*RUTAS DE Eventos*/
-     Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
-     Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
-     Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
-     Route::get('/eventos/{evento}/view', [EventoController::class, 'show'])->name('eventos.show');
-     Route::get('/eventos/{evento}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
-     Route::put('/eventos/{evento}', [EventoController::class, 'update'])->name('eventos.update');
-     Route::delete('/eventos/{evento}', [EventoController::class, 'destroy'])->name('eventos.destroy');
+    /*RUTAS DE Eventos*/
+    Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
+    Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
+    Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
+    Route::get('/eventos/{evento}/view', [EventoController::class, 'show'])->name('eventos.show');
+    Route::get('/eventos/{evento}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
+    Route::put('/eventos/{evento}', [EventoController::class, 'update'])->name('eventos.update');
+    Route::delete('/eventos/{evento}', [EventoController::class, 'destroy'])->name('eventos.destroy');
 
-     /*RUTAS DE Mantenimiento*/
-     Route::get('/mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');
-     Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create');
-     Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
-     Route::get('/mantenimientos/{mantenimiento}/view', [MantenimientoController::class, 'show'])->name('mantenimientos.show');
-     Route::get('/mantenimientos/{mantenimiento}/edit', [MantenimientoController::class, 'edit'])->name('mantenimientos.edit');
-     Route::get('/mantenimientos/{mantenimiento}/criterio', [MantenimientoController::class, 'criterio'])->name('mantenimientos.criterio');
-     Route::put('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'update'])->name('mantenimientos.update');
-     Route::put('/mantenimientos/{mantenimiento}/criterios', [MantenimientoController::class, 'update_criterios'])->name('mantenimientos.update_criterios');
-     Route::put('/mantenimientos/{mantenimiento}/firma_usuario', [MantenimientoController::class, 'firma_usuario'])->name('mantenimientos.firma_usuario');
-     Route::delete('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy');
+    /*RUTAS DE Mantenimiento*/
+    Route::get('/mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');
+    Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create');
+    Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
+    Route::get('/mantenimientos/{mantenimiento}/view', [MantenimientoController::class, 'show'])->name('mantenimientos.show');
+    Route::get('/mantenimientos/{mantenimiento}/edit', [MantenimientoController::class, 'edit'])->name('mantenimientos.edit');
+    Route::get('/mantenimientos/revision', [MantenimientoController::class, 'revision'])->name('mantenimientos.revision');
+    Route::get('/mantenimientos/{mantenimiento}/criterio', [MantenimientoController::class, 'criterio'])->name('mantenimientos.criterio');
+    Route::put('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'update'])->name('mantenimientos.update');
+    Route::put('/mantenimientos/{mantenimiento}/criterios', [MantenimientoController::class, 'update_criterios'])->name('mantenimientos.update_criterios');
+    Route::put('/mantenimientos/{mantenimiento}/firma_usuario', [MantenimientoController::class, 'firma_usuario'])->name('mantenimientos.firma_usuario');
+    //  Route::put('/mantenimientos/{mantenimiento}/firma_jefe', [MantenimientoController::class, 'firma_jefe'])->name('mantenimientos.firma_jefe');
+    Route::put('/mantenimientos/{mantenimiento}/firma_auxiliar', [MantenimientoController::class, 'firma_auxiliar'])->name('mantenimientos.firma_auxiliar');
+    Route::delete('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy');
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

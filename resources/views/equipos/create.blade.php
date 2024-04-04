@@ -19,11 +19,12 @@
             <div class="form-group">
                 <label for="fecha_ingreso_equipo">Fecha de ingreso del equipo:</label>
                 <input type="date" class="form-control" id="fecha_ingreso_equipo" name="fecha_ingreso_equipo"
-                    value="{{ old('fecha_ingreso_equipo') }}">
+                       value="{{ old('fecha_ingreso_equipo', now()->format('Y-m-d')) }}">
                 @error('fecha_ingreso_equipo')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
             <br>
             <div class="form-group">
                 <label for="id_perfil">Colaborador asignado:</label>

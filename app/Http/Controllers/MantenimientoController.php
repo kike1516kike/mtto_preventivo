@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mantenimiento;
 use App\Models\Perfil;
 use App\Models\Detalle_mtto;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 class MantenimientoController extends Controller
@@ -109,33 +110,66 @@ class MantenimientoController extends Controller
 
 
     public function firma_usuario(Request $request, $id_mantenimiento)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'codigo_empleado' => 'required|integer',
-            'username' => 'required|string',
-            'password' => 'required|string',
-        ]);
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'cod_usuario_firma' => 'required',
+        'nombre_usuario_firma' => 'required',
+        'password_usuario_firma' => 'required',
+    ]);
 
-        // Obtener el mantenimiento por su ID
-        $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
+    // Obtener el mantenimiento por su 02
+    $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
 
-        // Verificar si la contraseña proporcionada coincide con la almacenada
-        if (Hash::check($request->password, $mantenimiento->password_usuario_firma)) {
-            // Si la contraseña coincide, guardar los campos de usuario y contraseña
-            $mantenimiento->cod_usuario_firma = $request->codigo_empleado;
-            $mantenimiento->nombre_usuario_firma = $request->username;
-            // No es necesario guardar la contraseña nuevamente si coincide
-            $mantenimiento->save();
+    // Verificar si la contraseña proporcionada coincide con la almacenada en la tabla de usuarios
+    $user = User::where('usuario', $request->nombre_usuario_firma)->first();
 
-            // Redirigir de vuelta a la página de mantenimientos con un mensaje de éxito
-            return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
-        } else {
-            // Si la contraseña no coincide, mostrar un mensaje de error
-            return redirect()->back()->with('error', 'La contraseña proporcionada es incorrecta. Por favor, inténtalo de nuevo.');
-        }
+    if ($user && Hash::check($request->password_usuario_firma, $user->password)) {
+        // Si la contraseña coincide, guardar el código de usuario en el mantenimiento
+        $mantenimiento->cod_usuario_firma = $request->input('cod_usuario_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
+        $mantenimiento->save();
+
+        // Redirigir de vuelta a la página de mantenimientos con un mensaje de éxito
+        return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
+    } else {
+        // Si la contraseña no coincide o el usuario no existe, mostrar un mensaje de error
+        return redirect()->back()->with('error', 'Credenciales de usuario incorrectas. Por favor, inténtalo de nuevo.');
     }
+}
 
+
+public function firma_auxiliar(Request $request, $id_mantenimiento)
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'cod_auxi_firma' => 'required',
+        'nombre_auxiliar_firma' => 'required',
+        'password_auxiliar_firma' => 'required',
+    ]);
+
+    // Obtener el mantenimiento por su 02
+    $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
+
+    // Verificar si la contraseña proporcionada coincide con la almacenada en la tabla de usuarios
+    $user = User::where('usuario', $request->nombre_auxiliar_firma)->first();
+
+    if ($user && Hash::check($request->password_auxiliar_firma, $user->password)) {
+        // Si la contraseña coincide, guardar el código de usuario en el mantenimiento
+        $mantenimiento->cod_auxi_firma = $request->input('cod_auxi_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
+        $mantenimiento->save();
+
+        // Redirigir de vuelta a la página de mantenimientos con un mensaje de éxito
+        return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
+    } else {
+        // Si la contraseña no coincide o el usuario no existe, mostrar un mensaje de error
+        return redirect()->back()->with('error', 'Credenciales de usuario incorrectas. Por favor, inténtalo de nuevo.');
+    }
+}
+
+    public function revision()
+    {
+        return view('mantenimientos.revision');
+    }
 
     /**
      * Show the form for editing the specified resource.

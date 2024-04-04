@@ -14,7 +14,7 @@ class UsuarioController extends Controller
     private function validar(Request $request)
     {
         $request->validate([
-            'usuario' => 'required|string|max:255',
+            'usuario' => 'required|unique:users|string|max:255',
             'rol' => 'required|integer',
             'password' => 'nullable|string|min:8',
             // Agrega más validaciones según sea necesario

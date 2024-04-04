@@ -81,10 +81,10 @@
                                     <th scope="row" class="text-md-right">Ubicacion:</th>
                                     <td>{{ $nombre_ubicacion }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <th scope="row" class="text-md-right">Id Evento:</th>
                                     <td>{{ $id_evento }}</td>
-                                </tr>
+                                </tr> --}}
                                 <!-- Agrega más campos según sea necesario -->
                             </tbody>
                         </table>
