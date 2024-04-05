@@ -11,6 +11,7 @@ use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PerifericoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\MantenimientoController;
+use App\Http\Controllers\RevisionController;
 use Illuminate\Support\Facades\Auth;
 
 Route::middleware(['guest'])->group(function () {
@@ -100,7 +101,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
     Route::get('/mantenimientos/{mantenimiento}/view', [MantenimientoController::class, 'show'])->name('mantenimientos.show');
     Route::get('/mantenimientos/{mantenimiento}/edit', [MantenimientoController::class, 'edit'])->name('mantenimientos.edit');
-    Route::get('/mantenimientos/revision', [MantenimientoController::class, 'revision'])->name('mantenimientos.revision');
+    // Route::get('/mantenimientos/revision', [MantenimientoController::class, 'revision'])->name('mantenimientos.revision');
     Route::get('/mantenimientos/{mantenimiento}/criterio', [MantenimientoController::class, 'criterio'])->name('mantenimientos.criterio');
     Route::put('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'update'])->name('mantenimientos.update');
     Route::put('/mantenimientos/{mantenimiento}/criterios', [MantenimientoController::class, 'update_criterios'])->name('mantenimientos.update_criterios');
@@ -108,6 +109,18 @@ Route::middleware('auth')->group(function () {
     //  Route::put('/mantenimientos/{mantenimiento}/firma_jefe', [MantenimientoController::class, 'firma_jefe'])->name('mantenimientos.firma_jefe');
     Route::put('/mantenimientos/{mantenimiento}/firma_auxiliar', [MantenimientoController::class, 'firma_auxiliar'])->name('mantenimientos.firma_auxiliar');
     Route::delete('/mantenimientos/{mantenimiento}', [MantenimientoController::class, 'destroy'])->name('mantenimientos.destroy');
+
+
+    /*RUTAS DE Revision*/
+    Route::get('/revisiones', [RevisionController::class, 'index'])->name('revisiones.index');
+    Route::get('/revisiones/create', [RevisionController::class, 'create'])->name('revisiones.create');
+    Route::post('/revisiones', [RevisionController::class, 'store'])->name('revisiones.store');
+    Route::get('/revisiones/{revision}/view', [RevisionController::class, 'show'])->name('revisiones.show');
+    Route::get('/revisiones/{revision}/edit', [RevisionController::class, 'edit'])->name('revisiones.edit');
+    Route::put('/revisiones/{revision}', [RevisionController::class, 'update'])->name('revisiones.update');
+    Route::put('/revisiones/{revision}/firma_jefe', [RevisionController::class, 'firma_jefe'])->name('mantenimientos.firma_jefe');
+    Route::delete('/revisiones/{revision}', [RevisionController::class, 'destroy'])->name('revisiones.destroy');
+
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });

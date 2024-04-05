@@ -14,7 +14,7 @@ class MantenimientoController extends Controller
     {
         $request->validate([
             'fecha_mantenimiento' => 'required',
-            'trimestre_mantenimeinto' => 'required|string',
+            // 'trimestre_mantenimeinto' => 'required|string',
             'cod_empleado_mtto' => 'required|integer',
             // 'nombres_mtto' => 'required|string|max:255',
             // 'apellidos_mtto' => 'required|string|max:255',
@@ -72,7 +72,7 @@ class MantenimientoController extends Controller
         // $fecha_formateada = date('Y-m-d', strtotime($fecha));
         //   $fecha;
 
-        $mantenimiento->trimestre_mantenimiento = $request->input('trimestre_mantenimiento');
+        // $mantenimiento->trimestre_mantenimiento = $request->input('trimestre_mantenimiento');
         $mantenimiento->cod_empleado_mtto = $request->input('cod_empleado_mtto');
         // $mantenimiento->nombres_mtto = $request->input('nombres_mtto');
         // $mantenimiento->apellidos_mtto = $request->input('apellidos_mtto');
@@ -166,10 +166,10 @@ public function firma_auxiliar(Request $request, $id_mantenimiento)
     }
 }
 
-    public function revision()
-    {
-        return view('mantenimientos.revision');
-    }
+    // public function revision()
+    // {
+    //     return view('mantenimientos.revision');
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -215,7 +215,7 @@ public function firma_auxiliar(Request $request, $id_mantenimiento)
 
         $mantenimiento->fecha_mantenimiento = date('Y-m-d', strtotime($request->input('fecha_mantenimiento')));
         // $mantenimiento->fecha_mantenimiento = $request->input('fecha_mantenimiento');
-        $mantenimiento->trimestre_mantenimiento = $request->input('trimestre_mantenimiento');
+        // $mantenimiento->trimestre_mantenimiento = $request->input('trimestre_mantenimiento');
         $mantenimiento->cod_empleado_mtto = $request->input('cod_empleado_mtto');
         // $mantenimiento->nombres_mtto = $request->input('nombres_mtto');
         // $mantenimiento->apellidos_mtto = $request->input('apellidos_mtto');

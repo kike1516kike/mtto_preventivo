@@ -16,7 +16,7 @@
                 @enderror
             </div>
             <br>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="trimestre_mantenimiento">Trimestre de Mantenimiento:</label>
                 <select class="form-control" id="trimestre_mantenimiento" name="trimestre_mantenimiento">
                     <option value="1° Trimestre">1° Trimestre</option>
@@ -26,7 +26,7 @@
                 @error('trimestre_mantenimiento')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
             <br>
             <div class="form-group">
                 <label for="cod_empleado_mtto">Codigo de empleado:</label>

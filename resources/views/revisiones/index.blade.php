@@ -63,18 +63,10 @@
                                         <li><a class="dropdown-item"
                                                 href="{{ route('mantenimientos.criterio', $mantenimiento) }}">Criterios</a>
                                         </li>
-                                        {{-- <li><a class="dropdown-item"
-                                            href="{{ route('mantenimientos.firmas', $mantenimiento) }}">Firmas</a>
-                                        </li> --}}
-                                        <button class="dropdown-item btn btn-danger btn-sm" type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#confirmSaveModal{{ $mantenimiento->id_mantenimiento }}">
-                                            Firma de Usuario
-                                        </button>
                                         <button class="dropdown-item btn btn-danger btn-sm" type="button"
                                             data-bs-toggle="modal"
                                             data-bs-target="#firmaSaveUaxiliar{{ $mantenimiento->id_mantenimiento }}">
-                                            Firma del Auxiliar
+                                            Firma del Jefe
                                         </button>
 
                                         <li><button class="dropdown-item btn btn-danger btn-sm" type="button"

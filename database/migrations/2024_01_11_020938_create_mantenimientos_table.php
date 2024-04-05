@@ -23,13 +23,17 @@ return new class extends Migration
             // $table->string('nombre_usuario_firma', 100)->nullable();
             // $table->string('password_usuario_firma', 100)->nullable();
             // $table->integer('cod_jefe_firma')->nullable();
-            $table->string('nombre_jefe_firma', 100)->nullable();
+            // $table->string('nombre_jefe_firma', 100)->nullable();
             // $table->string('password_jefe_firma', 100)->nullable();
             $table->integer('cod_auxi_firma')->nullable();
             // $table->string('nombre_auxi_firma', 100)->nullable();
             // $table->string('password_auxi_firma', 100)->nullable();
             $table->boolean('finalizado_mtto')->nullable();
             $table->date('fecha_finaliza')->nullable();
+
+            $table->unsignedInteger('id_revision');
+            $table->foreign('id_revision')->references('id_revision')->on('revisiones')->onDelete('cascade');
+
 
             $table->timestamps();
         });

@@ -9,7 +9,7 @@
             @csrf
             @method('PUT')
 
-            <div class="form-group">        
+            <div class="form-group">
                 <label for="descripcion_evento">Descripcion del Evento:</label>
                 <input type="text" class="form-control @error('descripcion_evento') is-invalid @enderror" id="descripcion_evento"
                     name="descripcion_evento" value="{{ old('descripcion_evento', $evento->descripcion_evento) }}">
