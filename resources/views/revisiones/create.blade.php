@@ -8,8 +8,8 @@
         <form action="{{ route('revisiones.store') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label for="trimestre_revision">Trimestre:</label>
-                <select class="form-control" id=trimestre_revision" name="Ttrimestre_revision">
+                <label for="trimestre_revision">Mantenimeinto N°:</label>
+                <select class="form-control" id="trimestre_revision" name="Ttrimestre_revision">
                     <option value="primer MTTO">primer MTTO</option>
                     <option value="segundo MTTO">segundo MTTO</option>
                     <option value="tercer MTTO">tercer MTTO</option>
@@ -27,7 +27,7 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-           
+
 
             <div class="form-group">
                 <label for="fecha_mantenimiento">Fecha de Mantenimiento:</label>
