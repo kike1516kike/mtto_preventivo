@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Revision;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RevisionController extends Controller
 {
@@ -15,7 +17,8 @@ class RevisionController extends Controller
             'fecha_creacion' => 'required',
             // 'trimestre_mantenimeinto' => 'required|string',
             'cod_jefe_firma',
-            'fecha_firma' => 'required',
+            'fecha_firma',
+            'estado_revision'
         ]);
     }
     /**
@@ -47,8 +50,9 @@ class RevisionController extends Controller
 
         $revision->trimestre_revision = $request->input('trimestre_revision');
         $revision->fecha_creacion = date('Y-m-d', strtotime($request->input('fecha_creacion')));
+        $revision->estado_revision = false;
         // $revision->cod_jefe_firma = $request->input('cod_jefe_firma');
-        $revision->fecha_firma = date('Y-m-d', strtotime($request->input('fecha_firma')));
+        // $revision->fecha_firma = date('Y-m-d', strtotime($request->input('fecha_firma')));
 
 
 
@@ -75,6 +79,8 @@ class RevisionController extends Controller
         if ($user && Hash::check($request->password_jefe_firma, $user->password)) {
             // Si la contraseña coincide, guardar el código de usuario en el mantenimiento
             $revision->cod_jefe_firma = $request->input('cod_jefe_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
+            $revision->fecha_firma = now();
+            $revision->estado_revision = true;
             $revision->save();
 
             // Redirigir de vuelta a la página de mantenimientos con un mensaje de éxito
@@ -113,8 +119,8 @@ class RevisionController extends Controller
         $revision->trimestre_revision = $request->input('trimestre_revision');
         $revision->fecha_creacion = date('Y-m-d', strtotime($request->input('fecha_creacion')));
         // $revision->cod_jefe_firma = $request->input('cod_jefe_firma');
-        $revision->fecha_firma = date('Y-m-d', strtotime($request->input('fecha_firma')));
-
+        // $revision->fecha_firma = date('Y-m-d', strtotime($request->input('fecha_firma')));
+        $revision->save();
         return redirect()->route('revisiones.index')->with('success', 'Revisión actualizado exitosamente.');
 
     }

@@ -118,7 +118,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/revisiones/{revision}/view', [RevisionController::class, 'show'])->name('revisiones.show');
     Route::get('/revisiones/{revision}/edit', [RevisionController::class, 'edit'])->name('revisiones.edit');
     Route::put('/revisiones/{revision}', [RevisionController::class, 'update'])->name('revisiones.update');
-    Route::put('/revisiones/{revision}/firma_jefe', [RevisionController::class, 'firma_jefe'])->name('mantenimientos.firma_jefe');
+    Route::put('/revisiones/{revision}/firma_jefe', [RevisionController::class, 'firma_jefe'])->name('revisiones.firma_jefe');
     Route::delete('/revisiones/{revision}', [RevisionController::class, 'destroy'])->name('revisiones.destroy');
 
 

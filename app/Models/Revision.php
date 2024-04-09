@@ -19,6 +19,7 @@ class Revision extends Model
         'fecha_creacion',
         'cod_jefe_firma',
         'fecha_firma',
+        'estado_revision',
 
     ];
 }

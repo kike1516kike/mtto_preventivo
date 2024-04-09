@@ -10,7 +10,7 @@
         @method('PUT')
         <div class="form-group">
             <label for="usuario">Usuario:</label>
-            <input type="text" class="form-control @error('usuario') is-invalid @enderror" id="usuario" name="usuario" value="{{ old('usuario', $usuario->usuario) }}">
+            <input readonly type="text" class="form-control @error('usuario') is-invalid @enderror" id="usuario" name="usuario" value="{{ old('usuario', $usuario->usuario) }}">
             @error('usuario')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror
