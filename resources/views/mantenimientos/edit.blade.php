@@ -62,6 +62,14 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+            {{-- <div class="form-group">
+                <label for="finalizado_mtto">Finaliza MTTO:</label>
+                <input type="checkbox" class="form-check-input" id="finalizado_mtto" name="finalizado_mtto"
+                    {{ old('finalizado_mtto', $mantenimiento->finalizado_mtto) ? 'checked' : '' }}>
+                @error('finalizado_mtto')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div> --}}
             <!-- Agrega más campos según sea necesario -->
             <br>
             <div class="form-group">

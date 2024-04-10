@@ -8,6 +8,20 @@
     <form action="{{ route('usuarios.store') }}" method="POST">
         @csrf
         <div class="form-group">
+            <label for="id_perfil">Colaborador asignado:</label>
+            <select class="form-control" id="id_perfil" name="id_perfil">
+                <option value="">Selecciona Colaborador</option>
+                @foreach ($perfiles as $perfil)
+                    <option value="{{ $perfil->id_perfil }}">{{ $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil }}
+                    </option>
+                @endforeach
+            </select>
+            @error('id_perfil')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group">
             <label for="usuario">Usuario:</label>
             <input type="text" class="form-control" id="usuario" name="usuario" value="{{ old('usuario') }}">
             @error('usuario')

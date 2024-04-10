@@ -57,25 +57,32 @@
 
                                     <ul class="dropdown-menu"
                                         aria-labelledby="dropdownMenuButton{{ $mantenimiento->id_mantenimiento }}">
+                                        @if ($mantenimiento->cod_usuario_firma == null)
+                                            <li><a class="dropdown-item"
+                                                    href="{{ route('mantenimientos.edit', $mantenimiento) }}">Editar</a>
+                                            </li>
 
-                                        <li><a class="dropdown-item"
-                                                href="{{ route('mantenimientos.edit', $mantenimiento) }}">Editar</a></li>
-                                        <li><a class="dropdown-item"
-                                                href="{{ route('mantenimientos.criterio', $mantenimiento) }}">Criterios</a>
-                                        </li>
-                                        {{-- <li><a class="dropdown-item"
-                                            href="{{ route('mantenimientos.firmas', $mantenimiento) }}">Firmas</a>
-                                        </li> --}}
-                                        <button class="dropdown-item btn btn-danger btn-sm" type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#confirmSaveModal{{ $mantenimiento->id_mantenimiento }}">
-                                            Firma de Usuario
-                                        </button>
-                                        <button class="dropdown-item btn btn-danger btn-sm" type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#firmaSaveUaxiliar{{ $mantenimiento->id_mantenimiento }}">
-                                            Firma del Auxiliar
-                                        </button>
+                                            <li><a class="dropdown-item"
+                                                    href="{{ route('mantenimientos.criterio', $mantenimiento) }}">Criterios</a>
+                                            </li>
+
+                                                <button class="dropdown-item btn btn-danger btn-sm" type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#confirmSaveModal{{ $mantenimiento->id_mantenimiento }}">
+                                                    Firma de Usuario
+                                                </button>
+
+                                        @endif
+                                        @if ($mantenimiento->cod_usuario_firma != null and $mantenimiento->cod_auxi_firma == null)
+                                            {{-- @if () --}}
+                                                <button class="dropdown-item btn btn-danger btn-sm" type="button"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#firmaSaveUaxiliar{{ $mantenimiento->id_mantenimiento }}">
+                                                    Firma del Auxiliar
+                                                </button>
+                                            {{-- @endif --}}
+                                        @endif
+
 
                                         <li><button class="dropdown-item btn btn-danger btn-sm" type="button"
                                                 data-bs-toggle="modal"

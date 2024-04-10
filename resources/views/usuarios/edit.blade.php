@@ -9,6 +9,21 @@
         @csrf
         @method('PUT')
         <div class="form-group">
+            <label for="id_perfil">Colaborador asignado:</label>
+            <select class="form-control @error('id_perfil') is-invalid @enderror" id="id_perfil" name="id_perfil">
+                <option value="">Selecciona Colaborador</option>
+                @foreach ($perfiles as $perfil)
+                    <option value="{{ $perfil->id_perfil }}"
+                        {{ old('id_perfil', $usuario->id_perfil) == $perfil->id_perfil ? 'selected' : '' }}>
+                        {{ $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil }}
+                    </option>
+                @endforeach
+            </select>
+            @error('id_perfil')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group">
             <label for="usuario">Usuario:</label>
             <input readonly type="text" class="form-control @error('usuario') is-invalid @enderror" id="usuario" name="usuario" value="{{ old('usuario', $usuario->usuario) }}">
             @error('usuario')

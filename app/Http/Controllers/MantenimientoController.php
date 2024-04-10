@@ -10,35 +10,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 class MantenimientoController extends Controller
 {
-    private function validar(Request $request)
-    {
-        $request->validate([
-            'fecha_mantenimiento' => 'required',
-            // 'trimestre_mantenimeinto' => 'required|string',
-            'cod_empleado_mtto' => 'required|integer',
-            // 'nombres_mtto' => 'required|string|max:255',
-            // 'apellidos_mtto' => 'required|string|max:255',
-            // 'cargo_mtto' => 'required|string|max:255',
-            'observacion_mtto' => 'string',
-            // 'cod_usuario_firma' => 'required|integer|max:255',
-            // 'nombre_usuario_firma' => 'required|string|max:255',
-            // 'password_usuario_firma' => 'required|',
-            // 'cod_jefe_firma' => 'required|integer|max:255',
-            // 'nombre_jefe_firma' => 'required|string|max:255',
-            // 'password_jefe_firma' => 'required',
-            // 'cod_auxi_firma' => 'required|integer|max:255',
-            // 'nombre_auxi_firma' => 'required|string|max:255',
-            // 'password_auxi_firma' => 'required',
-            // 'finalizado_mtto',
-        ]);
-    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $mantenimientos = Mantenimiento::paginate(10);
-
+        
         return view('mantenimientos.index', compact('mantenimientos'));
     }
 
@@ -47,10 +26,6 @@ class MantenimientoController extends Controller
      */
     public function create()
     {
-        // $marcas = Marca::all();
-        // $voffices = Voffice::all();
-        // $perfiles = Perfil::all();
-        // $ubicaciones = Ubicacion::all();
         return view('mantenimientos.create');
     }
 
@@ -59,35 +34,20 @@ class MantenimientoController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validar($request);
 
-        // $EquipoData = $this->getEquipoData($request);
-
-        // Equipo::create($EquipoData);
-
+        // $request->validate([
+        //     'fecha_mantenimiento' => 'required',
+        //     'cod_empleado_mtto' => 'required|integer',
+        //     'observacion_mtto' => 'string',
+        // ]);
         $mantenimiento = new Mantenimiento();
         //  throw
 
         $mantenimiento->fecha_mantenimiento = date('Y-m-d', strtotime($request->input('fecha_mantenimiento')));
-        // $fecha_formateada = date('Y-m-d', strtotime($fecha));
-        //   $fecha;
 
-        // $mantenimiento->trimestre_mantenimiento = $request->input('trimestre_mantenimiento');
         $mantenimiento->cod_empleado_mtto = $request->input('cod_empleado_mtto');
-        // $mantenimiento->nombres_mtto = $request->input('nombres_mtto');
-        // $mantenimiento->apellidos_mtto = $request->input('apellidos_mtto');
-        // $mantenimiento->cargo_mtto = $request->input('cargo_mtto');
         $mantenimiento->observacion_mtto = $request->input('observacion_mtto');
-        // $mantenimiento->cod_usuario_firma = $request->input('cod_usuario_firma');
-        // $mantenimiento->nombre_usuario_firma = $request->input('nombre_usuario_firma');
-        // $mantenimiento->password_usuario_firma = $request->input('password_usuario_firma');
-        // $mantenimiento->cod_jefe_firma = $request->has('cod_jefe_firma');
-        // $mantenimiento->nombre_jefe_firma = $request->input('nombre_jefe_firma');
-        // $mantenimiento->password_jefe_firma = $request->input('password_jefe_firma');
-        // $mantenimiento->cod_auxi_firma = $request->input('cod_auxi_firma');
-        // $mantenimiento->nombre_auxi_firma = $request->input('nombre_auxi_firma');
-        // $mantenimiento->password_auxi_firma = $request->input('password_auxi_firma');
-        // $mantenimiento->finalizado_mtto = $request->input('finalizado_mtto');
+        $mantenimiento->finalizado_mtto = false;
 
         $mantenimiento->save();
 
@@ -107,85 +67,69 @@ class MantenimientoController extends Controller
     //     return view('mantenimientos.view', compact('mantenimiento'));
     // }
 
-
-
     public function firma_usuario(Request $request, $id_mantenimiento)
-{
-    // Validar los datos del formulario
-    $request->validate([
-        'cod_usuario_firma' => 'required',
-        'nombre_usuario_firma' => 'required',
-        'password_usuario_firma' => 'required',
-    ]);
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'cod_usuario_firma' => 'required',
+            'nombre_usuario_firma' => 'required',
+            'password_usuario_firma' => 'required',
+        ]);
 
-    // Obtener el mantenimiento por su 02
-    $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
+        $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
 
-    // Verificar si la contraseña proporcionada coincide con la almacenada en la tabla de usuarios
-    $user = User::where('usuario', $request->nombre_usuario_firma)->first();
+        $user = User::where('usuario', $request->nombre_usuario_firma)->first();
 
-    if ($user && Hash::check($request->password_usuario_firma, $user->password)) {
-        // Si la contraseña coincide, guardar el código de usuario en el mantenimiento
-        $mantenimiento->cod_usuario_firma = $request->input('cod_usuario_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
-        $mantenimiento->save();
+        if ($user && Hash::check($request->password_usuario_firma, $user->password)) {
+            $mantenimiento->cod_usuario_firma = $request->input('cod_usuario_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
+            $mantenimiento->save();
 
-        // Redirigir de vuelta a la página de mantenimientos con un mensaje de éxito
-        return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
-    } else {
-        // Si la contraseña no coincide o el usuario no existe, mostrar un mensaje de error
-        return redirect()->back()->with('error', 'Credenciales de usuario incorrectas. Por favor, inténtalo de nuevo.');
+           return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
+        } else {
+            return redirect()->back()->with('error', 'Credenciales de usuario incorrectas. Por favor, inténtalo de nuevo.');
+        }
     }
-}
 
+    public function firma_auxiliar(Request $request, $id_mantenimiento)
+    {
+        $request->validate([
+            'cod_auxi_firma' => 'required',
+            'nombre_auxiliar_firma' => 'required',
+            'password_auxiliar_firma' => 'required',
+        ]);
 
-public function firma_auxiliar(Request $request, $id_mantenimiento)
-{
-    // Validar los datos del formulario
-    $request->validate([
-        'cod_auxi_firma' => 'required',
-        'nombre_auxiliar_firma' => 'required',
-        'password_auxiliar_firma' => 'required',
-    ]);
+        $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
+ $user = User::where('usuario', $request->nombre_auxiliar_firma)->first();
 
-    // Obtener el mantenimiento por su 02
-    $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
+        if ($user && Hash::check($request->password_auxiliar_firma, $user->password)) {
+           $mantenimiento->cod_auxi_firma = $request->input('cod_auxi_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
+            $mantenimiento->finalizado_mtto = true;
+            $mantenimiento->save();
 
-    // Verificar si la contraseña proporcionada coincide con la almacenada en la tabla de usuarios
-    $user = User::where('usuario', $request->nombre_auxiliar_firma)->first();
-
-    if ($user && Hash::check($request->password_auxiliar_firma, $user->password)) {
-        // Si la contraseña coincide, guardar el código de usuario en el mantenimiento
-        $mantenimiento->cod_auxi_firma = $request->input('cod_auxi_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
-        $mantenimiento->save();
-
-        // Redirigir de vuelta a la página de mantenimientos con un mensaje de éxito
-        return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
-    } else {
-        // Si la contraseña no coincide o el usuario no existe, mostrar un mensaje de error
-        return redirect()->back()->with('error', 'Credenciales de usuario incorrectas. Por favor, inténtalo de nuevo.');
+            return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
+        } else {
+            return redirect()->back()->with('error', 'Credenciales de usuario incorrectas. Por favor, inténtalo de nuevo.');
+        }
     }
-}
-
-    // public function revision()
-    // {
-    //     return view('mantenimientos.revision');
-    // }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function criterio(Mantenimiento $mantenimiento)
     {
-        $detalles_mtto = Detalle_mtto::where('id_mantenimiento', $mantenimiento->id_mantenimiento)->get();
-        return view('mantenimientos.criterio', compact('detalles_mtto', 'mantenimiento'));
+        if($mantenimiento->cod_usuario_firma == NULL){
+            $detalles_mtto = Detalle_mtto::where('id_mantenimiento', $mantenimiento->id_mantenimiento)->get();
+            return view('mantenimientos.criterio', compact('detalles_mtto', 'mantenimiento'));
+        }else{
+            return redirect()->route('mantenimientos.index');
+        }
+
     }
 
     public function update_criterios(Request $request, $id_mantenimiento)
     {
-        // Obtener los detalles del mantenimiento por su id
         $detalles_mtto = Detalle_mtto::where('id_mantenimiento', $id_mantenimiento)->get();
 
-        // Iterar sobre los detalles y actualizar los criterios seleccionados
         foreach ($detalles_mtto as $detalle) {
             $detalle->selecciona_criterio_mtto = in_array($detalle->id_detalle_mtto, $request->input('criterios', []));
             $detalle->save();
@@ -196,11 +140,7 @@ public function firma_auxiliar(Request $request, $id_mantenimiento)
 
     public function edit(Mantenimiento $mantenimiento)
     {
-        // $marcas = Marca::all();
-        // $voffices = Voffice::all();
-        // $perfiles = Perfil::all();
-        // $ubicaciones = Ubicacion::all();
-        $opciones_tipo_equipo = ['Laptop', 'Escritorio'];
+      $opciones_tipo_equipo = ['Laptop', 'Escritorio'];
         return view('mantenimientos.edit', compact('opciones_tipo_equipo', 'mantenimiento'));
     }
 
@@ -209,29 +149,17 @@ public function firma_auxiliar(Request $request, $id_mantenimiento)
      */
     public function update(Request $request, $mantenimiento)
     {
-        // $this->validar($request);
 
+        // $request->validate([
+        //     'fecha_mantenimiento' => 'required',
+        //     'cod_empleado_mtto' => 'required|integer',
+        //     'observacion_mtto' => 'string',
+        // ]);
         $mantenimiento = Mantenimiento::find($mantenimiento);
 
         $mantenimiento->fecha_mantenimiento = date('Y-m-d', strtotime($request->input('fecha_mantenimiento')));
-        // $mantenimiento->fecha_mantenimiento = $request->input('fecha_mantenimiento');
-        // $mantenimiento->trimestre_mantenimiento = $request->input('trimestre_mantenimiento');
         $mantenimiento->cod_empleado_mtto = $request->input('cod_empleado_mtto');
-        // $mantenimiento->nombres_mtto = $request->input('nombres_mtto');
-        // $mantenimiento->apellidos_mtto = $request->input('apellidos_mtto');
-        // $mantenimiento->cargo_mtto = $request->input('cargo_mtto');
-        $mantenimiento->observacion_mtto = $request->input('observacion_mtto');
-        // $mantenimiento->cod_usuario_firma = $request->input('cod_usuario_firma');
-        // $mantenimiento->nombre_usuario_firma = $request->input('nombre_usuario_firma');
-        // $mantenimiento->password_usuario_firma = $request->input('password_usuario_firma');
-        // $mantenimiento->cod_jefe_firma = $request->has('cod_jefe_firma');
-        // $mantenimiento->nombre_jefe_firma = $request->input('nombre_jefe_firma');
-        // $mantenimiento->password_jefe_firma = $request->input('password_jefe_firma');
-        // $mantenimiento->cod_auxi_firma = $request->input('cod_auxi_firma');
-        // $mantenimiento->nombre_auxi_firma = $request->input('nombre_auxi_firma');
-        // $mantenimiento->password_auxi_firma = $request->input('password_auxi_firma');
-        // $mantenimiento->finalizado_mtto = $request->input('finalizado_mtto');
-
+       $mantenimiento->observacion_mtto = $request->input('observacion_mtto');
         $mantenimiento->save();
 
         return redirect()->route('mantenimientos.index')->with('success', 'Mantenimiento actualizado exitosamente.');

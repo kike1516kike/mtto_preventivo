@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Perfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -49,7 +50,8 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        $perfiles = Perfil::all();
+        return view('usuarios.create', compact('perfiles'));
     }
 
     /**
@@ -72,6 +74,7 @@ class UsuarioController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
+        $user->id_perfil = $request->input('id_perfil');
 
         $user->save();
 
@@ -87,7 +90,9 @@ class UsuarioController extends Controller
      */
     public function show(User $usuario)
     {
-        return view('usuarios.view', compact('usuario'));
+        $perfil = Perfil::find($usuario->id_perfil);
+        $nombre_perfil = $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil;
+        return view('usuarios.view', compact('usuario', 'nombre_perfil'));
     }
 
     /**
@@ -95,7 +100,8 @@ class UsuarioController extends Controller
      */
     public function edit(User $usuario)
     {
-        return view('usuarios.edit', compact('usuario'));
+        $perfiles = Perfil::all();
+        return view('usuarios.edit', compact('usuario', 'perfiles'));
     }
 
     /**
@@ -118,6 +124,7 @@ class UsuarioController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
+        $user->id_perfil = $request->input('id_perfil');
 
         $user->save();
         // $userData = $this->getUserData($request);

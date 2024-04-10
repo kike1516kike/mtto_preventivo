@@ -29,12 +29,13 @@ class User extends Authenticatable
         'usuario',
         'password',
         'rol',
-        'fecha_registro',
-        'usuario_registro',
-        'eliminado',
-        'usuario_eliminado',
-        'fecha_modifica',
-        'usuario_modifica',
+        'id_perfil',
+        // 'fecha_registro',
+        // 'usuario_registro',
+        // 'eliminado',
+        // 'usuario_eliminado',
+        // 'fecha_modifica',
+        // 'usuario_modifica',
     ];
 
     /**

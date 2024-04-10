@@ -56,14 +56,17 @@
                                         aria-labelledby="dropdownMenuButton{{ $revision->id_revision }}">
                                         <li><a class="dropdown-item"
                                                 href="{{ route('revisiones.show', $revision) }}">View</a></li>
-                                        <li><a class="dropdown-item"
-                                                href="{{ route('revisiones.edit', $revision) }}">Editar</a></li>
+                                                @if ($revision->cod_jefe_firma == null )
+                                                <li><a class="dropdown-item"
+                                                    href="{{ route('revisiones.edit', $revision) }}">Editar</a></li>
 
-                                        <button class="dropdown-item btn btn-danger btn-sm" type="button"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#firmaSaveJefe{{ $revision->id_revision }}">
-                                            Firma del Jefe
-                                        </button>
+                                            <button class="dropdown-item btn btn-danger btn-sm" type="button"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#firmaSaveJefe{{ $revision->id_revision }}">
+                                                Firma del Jefe
+                                            </button>
+                                                @endif
+
 
                                         <li><button class="dropdown-item btn btn-danger btn-sm" type="button"
                                                 data-bs-toggle="modal"

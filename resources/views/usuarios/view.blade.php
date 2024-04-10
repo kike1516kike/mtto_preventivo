@@ -19,6 +19,11 @@
                                 <td>{{ $usuario->id }}</td>
                             </tr>
                             <tr>
+                                <th scope="row" class="text-md-right">Colaborador:</th>
+                                <td>{{ $nombre_perfil }}</td>
+                            </tr>
+
+                            <tr>
                                 <th scope="row" class="text-md-right">Nombre de Usuario:</th>
                                 <td>{{ $usuario->usuario }}</td>
                             </tr>
