@@ -17,42 +17,43 @@ class MantenimientoController extends Controller
     public function index()
     {
         $mantenimientos = Mantenimiento::paginate(10);
-        
+
         return view('mantenimientos.index', compact('mantenimientos'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('mantenimientos.create');
-    }
+    // public function create()
+    // {
+    //     return view('mantenimientos.create');
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
+    // public function store(Request $request)
+    // {
 
-        // $request->validate([
-        //     'fecha_mantenimiento' => 'required',
-        //     'cod_empleado_mtto' => 'required|integer',
-        //     'observacion_mtto' => 'string',
-        // ]);
-        $mantenimiento = new Mantenimiento();
-        //  throw
+    //     // $request->validate([
+    //     //     'fecha_mantenimiento' => 'required',
+    //     //     'cod_empleado_mtto' => 'required|integer',
+    //     //     'observacion_mtto' => 'string',
+    //     // ]);
+    //     $mantenimiento = new Mantenimiento();
+    //     //  throw
 
-        $mantenimiento->fecha_mantenimiento = date('Y-m-d', strtotime($request->input('fecha_mantenimiento')));
+    //     $mantenimiento->fecha_mantenimiento = date('Y-m-d', strtotime($request->input('fecha_mantenimiento')));
 
-        $mantenimiento->cod_empleado_mtto = $request->input('cod_empleado_mtto');
-        $mantenimiento->observacion_mtto = $request->input('observacion_mtto');
-        $mantenimiento->finalizado_mtto = false;
+    //     $mantenimiento->cod_empleado_mtto = $request->input('cod_empleado_mtto');
+    //     $mantenimiento->observacion_mtto = $request->input('observacion_mtto') ?? '';
+    //     $mantenimiento->finalizado_mtto = false;
+    //     $mantenimiento->id_revision = NULL;
 
-        $mantenimiento->save();
+    //     $mantenimiento->save();
 
-        return redirect()->route('mantenimientos.index')->with('success', 'Mantenimento creado correctamente');
-    }
+    //     return redirect()->route('mantenimientos.index')->with('success', 'Mantenimento creado correctamente');
+    // }
 
     /**
      * Display the specified resource.

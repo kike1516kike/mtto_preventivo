@@ -19,10 +19,19 @@
                 @enderror
             </div>
             <br>
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="fecha_creacion">Fecha de Creacion de Revisión:</label>
                 <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion"
                     value="{{ old('fecha_creacion') }}">
+                @error('fecha_creacion')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div> --}}
+
+            <div class="form-group">
+                <label for="fecha_creacion">Fecha de Creacion de Revisión:</label>
+                <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion"
+                       value="{{ old('fecha_creacion', now()->format('Y-m-d')) }}">
                 @error('fecha_creacion')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

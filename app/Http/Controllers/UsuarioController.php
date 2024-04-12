@@ -91,7 +91,11 @@ class UsuarioController extends Controller
     public function show(User $usuario)
     {
         $perfil = Perfil::find($usuario->id_perfil);
-        $nombre_perfil = $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil;
+        if ($perfil) {
+            $nombre_perfil = $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil;
+        } else {
+            $nombre_perfil = null;
+        }
         return view('usuarios.view', compact('usuario', 'nombre_perfil'));
     }
 

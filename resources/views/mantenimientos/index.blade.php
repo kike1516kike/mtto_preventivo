@@ -19,7 +19,7 @@
             </div>
         @endif
         <h1>Listado de Mantenimientos</h1>
-        <a href="{{ route('mantenimientos.create') }}" class="btn btn-success mb-3">Crear Nuevo Registro</a>
+        {{-- <a href="{{ route('mantenimientos.create') }}" class="btn btn-success mb-3">Crear Nuevo Registro</a> --}}
 
         <div class="table-responsive">
             <table class="table table-WHITE table-striped">

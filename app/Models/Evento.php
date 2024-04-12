@@ -15,5 +15,6 @@ class Evento extends Model
 
     protected $fillable = [
         'descripcion_evento',
+        'id_equipo',
     ];
 }

@@ -20,6 +20,10 @@
                                     <td>{{ $evento->id_evento }}</td>
                                 </tr>
                                 <tr>
+                                    <th scope="row" class="text-md-right">Equipo:</th>
+                                    <td>{{ $nombre_equipo_actual }}</td>
+                                </tr>
+                                <tr>
                                     <th scope="row" class="text-md-right">Descripcion de Evento:</th>
                                     <td>{{ $evento->descripcion_evento }}</td>
                                 </tr>

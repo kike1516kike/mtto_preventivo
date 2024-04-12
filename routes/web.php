@@ -97,8 +97,8 @@ Route::middleware('auth')->group(function () {
 
     /*RUTAS DE Mantenimiento*/
     Route::get('/mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');
-    Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create');
-    Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
+    // Route::get('/mantenimientos/create', [MantenimientoController::class, 'create'])->name('mantenimientos.create');
+    // Route::post('/mantenimientos', [MantenimientoController::class, 'store'])->name('mantenimientos.store');
     Route::get('/mantenimientos/{mantenimiento}/view', [MantenimientoController::class, 'show'])->name('mantenimientos.show');
     Route::get('/mantenimientos/{mantenimiento}/edit', [MantenimientoController::class, 'edit'])->name('mantenimientos.edit');
     // Route::get('/mantenimientos/revision', [MantenimientoController::class, 'revision'])->name('mantenimientos.revision');

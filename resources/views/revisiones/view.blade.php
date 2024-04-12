@@ -1,98 +1,78 @@
-{{-- @extends('layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Ver Detalles del Equipo')
+@section('title', 'Detalles de la Revisión')
 
 @section('content')
-
-
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header bg-dark text-white text-center">
-                        Detalles del Equipo
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th scope="row" class="text-md-right">ID:</th>
-                                    <td>{{ $equipo->id_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Fecha de ingreso:</th>
-                                    <td>{{ $equipo->fecha_ingreso_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Codigo de activo fijo:</th>
-                                    <td>{{ $equipo->cod_act_fijo_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Tipo de equipo:</th>
-                                    <td>{{ $equipo->tipo_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Marca:</th>
-                                    <td>{{ $nombre_marca }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Modelo:</th>
-                                    <td>{{ $equipo->modelo_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Sistema Operativo:</th>
-                                    <td>{{ $equipo->sistema_operativo_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">RAM:</th>
-                                    <td>{{ $equipo->ram_equipo }}</td>
-                                </tr>
+        <h1>Detalles de la Revisión</h1>
+        <p><strong>ID de la Revisión:</strong> {{ $revision->id_revision }}</p>
+        <p><strong>Trimestre:</strong> {{ $revision->trimestre_revision }}</p>
+        <p><strong>Fecha de Creación:</strong> {{ $revision->fecha_creacion }}</p>
+        <a href="{{ route('revisiones.index') }}" class="btn btn-primary">Volver</a>
+        <!-- Otros detalles de la revisión según sea necesario -->
 
-                                <tr>
-                                    <th scope="row" class="text-md-right">Procesador:</th>
-                                    <td>{{ $equipo->procesador_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Disco:</th>
-                                    <td>{{ $equipo->disco_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Estado del equipo:</th>
-                                    @if ($equipo->estado_equipo == true)
-                                        <td>Desabilitado</td>
-                                    @else
-                                        <td>Habilitado</td>
-                                    @endif
+        <h2>Registros de Mantenimiento</h2>
+        @if ($registros->isEmpty())
+            <p>No hay registros de mantenimiento asociados a esta revisión.</p>
+        @else
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Fecha de Mantenimiento</th>
+                        <th>Trimestre de Mantenimiento</th>
+                        <th>Código de Empleado</th>
+                        <th>Observación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($registros as $registro)
+                        <tr>
+                            <td>{{ $registro->fecha_mantenimiento }}</td>
+                            <td>{{ $registro->trimestre_mantenimiento }}</td>
+                            <td>{{ $registro->cod_empleado_mtto }}</td>
+                            <td>{{ $registro->observacion_mtto }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">IP:</th>
-                                    <td>{{ $equipo->ip_equipo }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Version de Office:</th>
-                                    <td>{{ $nombre_office }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Perfil:</th>
-                                    <td>{{ $nombre_perfil }}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row" class="text-md-right">Ubicacion:</th>
-                                    <td>{{ $nombre_ubicacion }}</td>
-                                </tr>
+            {{-- Pagination links --}}
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <nav arial-label="Page navegation example">
+                        <ul class="pagination">
+                            @if ($registros->onFirstPage())
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $registros->previousPageUrl() }}"
+                                        tabindex="-1">Anterior</a>
+                                </li>
+                            @endif
 
-                            </tbody>
-                        </table>
-                        <div class="form-group row mb-0">
-                            <div class="">
-                                <a href="{{ route('equipos.index') }}" class="btn btn-success">Volver</a>
-                            </div>
-                        </div>
-                    </div>
+                            @foreach ($registros->getUrlRange(1, $registros->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $registros->currentPage() ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endforeach
+
+                            @if ($registros->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $registros->nextPageUrl() }}">Siguiente</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Siguiente</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </div>
     </div>
 
-@endsection --}}
+    @endif
+
+@endsection

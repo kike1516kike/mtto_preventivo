@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Evento;
+use App\Models\Equipo;
 use Illuminate\Http\Request;
 
 class EventoController extends Controller
@@ -14,6 +15,7 @@ class EventoController extends Controller
     {
         $request->validate([
             'descripcion_evento' => 'required|string|max:255',
+            'id_equipo' => 'required|integer',
             // Agrega más validaciones según sea necesario
         ]);
     }
@@ -32,7 +34,8 @@ class EventoController extends Controller
      */
     public function create()
     {
-        return view('eventos.create');
+        $equipos = Equipo::all();
+        return view('eventos.create', compact('equipos'));
     }
 
     /**
@@ -44,6 +47,7 @@ class EventoController extends Controller
 
         $evento = new Evento();
         $evento->descripcion_evento = $request->input('descripcion_evento');
+        $evento->id_equipo = $request->input('id_equipo');
         $evento->save();
         return redirect()->route('eventos.index')->with('success', 'Evento creado correctamente');
     }
@@ -53,7 +57,10 @@ class EventoController extends Controller
      */
     public function show(Evento $evento)
     {
-        return view('eventos.view', compact('evento'));
+        $equipoUnico = Equipo::find($evento->id_equipo);
+        $nombre_equipo_actual = $equipoUnico->nombre_equipo;
+
+        return view('eventos.view', compact('evento','nombre_equipo_actual'));
     }
 
     /**
@@ -61,7 +68,11 @@ class EventoController extends Controller
      */
     public function edit(Evento $evento)
     {
-        return view('eventos.edit', compact('evento'));
+        $equipos = Equipo::all();
+        $equipoUnico = Equipo::find($evento->id_equipo);
+        $nombre_equipo_actual = $equipoUnico->nombre_equipo;
+
+        return view('eventos.edit', compact('evento', 'equipos', 'nombre_equipo_actual'));
     }
 
     /**
@@ -73,6 +84,7 @@ class EventoController extends Controller
 
         $evento = Evento::find($evento);
         $evento->descripcion_evento = $request->input('descripcion_evento');
+        $evento->id_equipo = $request->input('id_equipo');
         $evento->save();
 
         return redirect()->route('eventos.index');

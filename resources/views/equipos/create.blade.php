@@ -31,7 +31,8 @@
                 <select class="form-control" id="id_perfil" name="id_perfil">
                     <option value="">Selecciona Colaborador</option>
                     @foreach ($perfiles as $perfil)
-                        <option value="{{ $perfil->id_perfil }}">{{ $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil }}
+                        <option value="{{ $perfil->id_perfil }}" {{ old('id_perfil') == $perfil->id_perfil ? 'selected' : '' }}>
+                            {{ $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil }}
                         </option>
                     @endforeach
                 </select>
@@ -45,7 +46,9 @@
                 <select class="form-control" id="id_ubicacion" name="id_ubicacion">
                     <option value="">Selecciona Ubicacion</option>
                     @foreach ($ubicaciones as $ubicacion)
-                        <option value="{{ $ubicacion->id_ubicacion }}">{{ $ubicacion->nombre_ubicacion }}</option>
+                        <option value="{{ $ubicacion->id_ubicacion }}" {{ old('id_ubicacion') == $ubicacion->id_ubicacion ? 'selected' : '' }}>
+                            {{ $ubicacion->nombre_ubicacion }}
+                        </option>
                     @endforeach
                 </select>
                 @error('id_ubicacion')
@@ -78,13 +81,16 @@
                 <select class="form-control" id="id_marca" name="id_marca">
                     <option value="">Selecciona una marca</option>
                     @foreach ($marcas as $marca)
-                        <option value="{{ $marca->id_marca }}">{{ $marca->nombre_marca }}</option>
+                        <option value="{{ $marca->id_marca }}" {{ old('id_marca') == $marca->id_marca ? 'selected' : '' }}>
+                            {{ $marca->nombre_marca }}
+                        </option>
                     @endforeach
                 </select>
                 @error('id_marca')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
             <br>
             <div class="form-group">
                 <label for="modelo_equipo">Modelo de Equipo:</label>
@@ -109,7 +115,9 @@
                 <select class="form-control" id="id_office" name="id_office">
                     <option value="">Selecciona una version de office</option>
                     @foreach ($voffices as $voffice)
-                        <option value="{{ $voffice->id_office }}">{{ $voffice->nombre_office }}</option>
+                        <option value="{{ $voffice->id_office }}" {{ old('id_office') == $voffice->id_office ? 'selected' : '' }}>
+                            {{ $voffice->nombre_office }}
+                        </option>
                     @endforeach
                 </select>
                 @error('id_office')

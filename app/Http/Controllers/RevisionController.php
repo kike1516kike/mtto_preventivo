@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Revision;
 use App\Models\User;
+use App\Models\Mantenimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -96,8 +97,10 @@ class RevisionController extends Controller
      */
     public function show(Revision $revision)
     {
-        return view('revisiones.show', compact('revision'));
+        $registros = Mantenimiento::where('id_revision', '=', $revision->id_revision)->paginate(10); // Cambiar 10 por el número de registros por página deseado
+        return view('revisiones.view', compact('revision', 'registros'));
     }
+
 
     /**
      * Show the form for editing the specified resource.

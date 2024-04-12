@@ -32,6 +32,7 @@
                         <td class="text-center">
                             <a href="{{ route('equipos.edit', $equipo) }}" class="btn btn-primary btn-sm">Editar</a>
                             <a href="{{ route('equipos.show', $equipo) }}" class="btn btn-info btn-sm">Ver</a>
+                            {{-- <a href="{{ route('equipos.show', $equipo->id_equipo) }}" class="btn btn-dark btn-sm">Evento</a> --}}
                             <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $equipo->id_equipo }}">Eliminar</button>
                         </td>
                     </tr>

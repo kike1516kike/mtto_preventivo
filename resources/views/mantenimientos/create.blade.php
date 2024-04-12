@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('title', 'Crear Mantenimiento')
 
@@ -15,18 +15,7 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <br>
-            {{-- <div class="form-group">
-                <label for="trimestre_mantenimiento">Trimestre de Mantenimiento:</label>
-                <select class="form-control" id="trimestre_mantenimiento" name="trimestre_mantenimiento">
-                    <option value="1° Trimestre">1° Trimestre</option>
-                    <option value="2° Trimestre">2° Trimestre</option>
-                    <option value="3° Trimestre">3° Trimestre</option>
-                </select>
-                @error('trimestre_mantenimiento')
-                    <div class="text-danger">{{ $message }}</div>
-                @enderror
-            </div> --}}
+
             <br>
             <div class="form-group">
                 <label for="cod_empleado_mtto">Codigo de empleado:</label>
@@ -52,4 +41,4 @@
             </div>
         </form>
     </div>
-@endsection
+@endsection --}}

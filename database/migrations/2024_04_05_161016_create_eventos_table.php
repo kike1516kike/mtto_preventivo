@@ -24,8 +24,8 @@ return new class extends Migration
             $table->datetime('fecha_modifica')->nullable();
             $table->string('usuario_modifica', 50)->nullable();
 
-            // $table->unsignedInteger('id_equipo');
-            // $table->foreign('id_equipo')->references('id_equipo')->on('equipos')->onDelete('cascade');
+            $table->unsignedInteger('id_equipo');
+            $table->foreign('id_equipo')->references('id_equipo')->on('equipos')->onDelete('cascade');
 
             $table->timestamps();
         });

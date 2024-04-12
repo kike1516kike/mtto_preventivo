@@ -15,7 +15,7 @@ class EquipoController extends Controller
     {
         $request->validate([
             'nombre_equipo' => 'required|string|max:255',
-            'fecha_ingreso_equipo' => 'required|max:255',
+            'fecha_ingreso_equipo' => 'required',
             'cod_act_fijo_equipo' => 'required|string|max:255',
             'tipo_equipo' => 'required|string|max:255',
             'id_marca' => 'required',
@@ -29,7 +29,7 @@ class EquipoController extends Controller
             'procesador_equipo' => 'required|string|max:255',
             'disco_equipo' => 'required|string|max:255',
             'estado_equipo',
-            'ip_equipo' => 'required|integer|max:255',
+            'ip_equipo' => 'required|integer',
         ]);
     }
 
