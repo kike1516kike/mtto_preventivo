@@ -12,58 +12,85 @@
                     <a class="nav-link active text-white" aria-current="page" href="{{ route('home') }}">Inicio</a>
                 </li> --}}
             </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle text-white" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Gestión
-                    </a>
-                    <ul class="dropdown-menu bg-dark">
-                        <li class="nav-item">
-                            <a class="dropdown-item text-white negro" href="{{ route('usuarios.index') }}">Usuarios</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item text-white negro" href="{{ route('marcas.index') }}">Marcas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item text-white negro"
-                                href="{{ route('ubicaciones.index') }}">Ubicaciones</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item text-white negro" href="{{ route('voffices.index') }}">V.Office</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item text-white negro" href="{{ route('perfiles.index') }}">Perfiles</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item text-white negro" href="{{ route('equipos.index') }}">Equipos</a>
-                        </li>
-                        <li class="nav-item negro">
-                            <a class="dropdown-item text-white" href="{{ route('perifericos.index') }}">Perifericos</a>
-                        </li>
-                        <li class="nav-item negro">
-                            <a class="dropdown-item text-white" href="{{ route('eventos.index') }}">Eventos</a>
-                        </li>
-                        <li class="nav-item negro">
-                            <a class="dropdown-item text-white" href="{{ route('mantenimientos.index') }}">Mantenimientos</a>
-                        </li>
-                        <li class="nav-item negro">
-                            <a class="dropdown-item text-white" href="{{ route('revisiones.index') }}">Revisiones</a>
-                        </li>
 
-                    </ul>
-                </li>
+            <ul class="navbar-nav ml-auto">
+                {{-- @if (Auth::check() && Auth::user()->name == 'Administrador') --}}
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Gestión
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li class="nav-item">
+                                <a class="dropdown-item text-white negro"
+                                    href="{{ route('usuarios.index') }}">Usuarios</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item text-white negro" href="{{ route('marcas.index') }}">Marcas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item text-white negro"
+                                    href="{{ route('ubicaciones.index') }}">Ubicaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item text-white negro"
+                                    href="{{ route('voffices.index') }}">V.Office</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item text-white negro"
+                                    href="{{ route('perfiles.index') }}">Perfiles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="dropdown-item text-white negro"
+                                    href="{{ route('equipos.index') }}">Equipos</a>
+                            </li>
+                            <li class="nav-item negro">
+                                <a class="dropdown-item text-white"
+                                    href="{{ route('perifericos.index') }}">Perifericos</a>
+                            </li>
+                            <li class="nav-item negro">
+                                <a class="dropdown-item text-white" href="{{ route('eventos.index') }}">Eventos</a>
+                            </li>
+                            <li class="nav-item negro">
+                                <a class="dropdown-item text-white"
+                                    href="{{ route('mantenimientos.index') }}">Mantenimientos</a>
+                            </li>
+                            <li class="nav-item negro">
+                                <a class="dropdown-item text-white"
+                                    href="{{ route('revisiones.index') }}">Revisiones</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                {{-- @else
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Gestión
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+
+                            <li class="nav-item negro">
+                                <a class="dropdown-item text-white"
+                                    href="{{ route('mantenimientos.index') }}">Mantenimientos</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                @endif --}}
                 <li class="nav-item">
 
-                    <form style="display: inline;" action="/logout" method="POST" id="logoutForm">
+                    <form style="display: inline;" action="logout" method="POST" id="logoutForm">
                         @csrf
                         <a class="nav-link text-white" href="#" onclick="logout()">Logout</a>
                     </form>
                 </li>
+
             </ul>
+
 
 
 

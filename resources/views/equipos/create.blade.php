@@ -40,6 +40,23 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+            {{-- <div class="form-group">
+                <label for="id_perfil">Colaborador asignado:</label>
+                <input type="text" id="id_perfil_input" name="id_perfil" class="form-control" list="perfiles_list" placeholder="Selecciona un colaborador">
+                <datalist id="perfiles_list" name="id_perfil">
+                    @foreach ($perfiles as $perfil)
+                        <option value="{{ $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil }}">
+                    @endforeach
+                </datalist>
+                <select style="display: none;" id="id_perfil" name="id_perfil">
+                    <option value="">Selecciona Colaborador</option>
+                    @foreach ($perfiles as $perfil)
+                        <option value="{{ $perfil->id_perfil }}">{{ $perfil->nombres_perfil . ' ' . $perfil->apellidos_perfil }}</option>
+                    @endforeach
+                </select>
+            </div> --}}
+
             <br>
             <div class="form-group">
                 <label for="id_ubicacion">Ubicacion del equipo:</label>

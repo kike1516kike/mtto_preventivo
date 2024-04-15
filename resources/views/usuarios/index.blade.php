@@ -48,7 +48,7 @@
                         </li>
                     @endif
 
-                    @foreach ($usuarios->getUrlRange(1, $usuarios->lastPage()) as $page => $url)
+                    @foreach ($usuarios->getUrlRange(max(1, $usuarios->currentPage() - 2), min($usuarios->lastPage(), $usuarios->currentPage() + 2)) as $page => $url)
                         <li class="page-item {{ $page == $usuarios->currentPage() ? 'active' : '' }}">
                             <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                         </li>
