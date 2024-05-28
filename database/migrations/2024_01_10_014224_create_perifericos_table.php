@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('usuario_eliminado', 50)->nullable();
             $table->datetime('fecha_modifica')->nullable();
             $table->string('usuario_modifica', 50)->nullable();
-            $table->integer('id_evento')->nullable();
+            // $table->integer('id_evento')->nullable();
 
             $table->unsignedInteger('id_perfil');
             $table->foreign('id_perfil')->references('id_perfil')->on('perfiles')->onDelete('cascade');

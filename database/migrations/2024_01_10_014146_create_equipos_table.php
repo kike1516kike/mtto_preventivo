@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('disco_equipo', 100)->nullable();
             $table->boolean('estado_equipo')->nullable();
             $table->integer('ip_equipo')->nullable();
-            $table->integer('id_evento')->nullable();
+            // $table->integer('id_evento')->nullable();
 
             $table->datetime('fecha_registro')->nullable();
             $table->string('usuario_registro', 50)->nullable();

@@ -56,8 +56,8 @@
                                         aria-labelledby="dropdownMenuButton{{ $revision->id_revision }}">
                                         <li><a class="dropdown-item"
                                                 href="{{ route('revisiones.show', $revision) }}">View</a></li>
-                                                @if ($revision->cod_jefe_firma == null )
-                                                <li><a class="dropdown-item"
+                                        @if ($revision->cod_jefe_firma == null)
+                                            <li><a class="dropdown-item"
                                                     href="{{ route('revisiones.edit', $revision) }}">Editar</a></li>
 
                                             <button class="dropdown-item btn btn-danger btn-sm" type="button"
@@ -65,7 +65,7 @@
                                                 data-bs-target="#firmaSaveJefe{{ $revision->id_revision }}">
                                                 Firma del Jefe
                                             </button>
-                                                @endif
+                                        @endif
 
 
                                         <li><button class="dropdown-item btn btn-danger btn-sm" type="button"
@@ -89,7 +89,7 @@
         {{-- Pagination links --}}
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center">
-                <nav arial-label="Page navegation example">
+                <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         @if ($revisiones->onFirstPage())
                             <li class="page-item disabled">
@@ -102,7 +102,7 @@
                             </li>
                         @endif
 
-                        @foreach ($revisiones->getUrlRange(1, $revisiones->lastPage()) as $page => $url)
+                        @foreach ($revisiones->getUrlRange(max(1, $revisiones->currentPage() - 2), min($revisiones->lastPage(), $revisiones->currentPage() + 2)) as $page => $url)
                             <li class="page-item {{ $page == $revisiones->currentPage() ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>

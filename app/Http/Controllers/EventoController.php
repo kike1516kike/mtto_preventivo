@@ -25,17 +25,26 @@ class EventoController extends Controller
      */
     public function index()
     {
+        $primerEquipo = Equipo::first(); // Obtiene el primer registro de la tabla de equipos
+        $idPrimerEquipo = $primerEquipo ? $primerEquipo->id_equipo : null; // Obtén el ID del primer equipo si existe
+
         $eventos = Evento::paginate(10);
-        return view('eventos.index', compact('eventos'));
+
+        return view('eventos.index', compact('eventos', 'idPrimerEquipo'));
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        $equipoId =$_GET['id'];
+        $equipo = Equipo::findOrFail($equipoId);
+        $nombreEquipo = $equipo->nombre_equipo;
+        // echo $equipoId;
         $equipos = Equipo::all();
-        return view('eventos.create', compact('equipos'));
+        return view('eventos.create', compact('equipos', 'equipoId', 'nombreEquipo'));
     }
 
     /**
@@ -47,6 +56,7 @@ class EventoController extends Controller
 
         $evento = new Evento();
         $evento->descripcion_evento = $request->input('descripcion_evento');
+        
         $evento->id_equipo = $request->input('id_equipo');
         $evento->save();
         return redirect()->route('eventos.index')->with('success', 'Evento creado correctamente');

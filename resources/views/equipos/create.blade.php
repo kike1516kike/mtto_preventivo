@@ -8,6 +8,14 @@
         <form action="{{ route('equipos.store') }}" method="POST">
             @csrf
             <div class="form-group">
+                <button type="submit" id="btnGuardar" class="btn btn-primary" onclick="mostrarLoading()">Guardar</button>
+                <button class="btn btn-primary d-none" type="button" id="btnLoading" disabled>
+                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status">Loading...</span>
+                </button>
+                <a href="{{ route('equipos.index') }}" class="btn btn-secondary">Cancelar</a>
+            </div>
+            <div class="form-group">
                 <label for="nombre_equipo">Nombre del Equipo:</label>
                 <input type="text" class="form-control" id="nombre_equipo" name="nombre_equipo"
                     value="{{ old('nombre_equipo') }}">
@@ -185,7 +193,7 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <br>
+            {{-- <br>
             <div class="form-group">
                 <label for="id_evento">Id evento:</label>
                 <input type="number" class="form-control" id="id_evento" name="id_evento" placelholder="128.100.1.?"
@@ -195,11 +203,8 @@
                 @enderror
             </div>
 
-            <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <a href="{{ route('equipos.index') }}" class="btn btn-secondary">Cancelar</a>
-            </div>
+            <br> --}}
+
         </form>
     </div>
 @endsection

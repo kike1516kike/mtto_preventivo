@@ -42,14 +42,14 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="id_evento">Id Evento:</label>
                 <input type="text" class="form-control @error('id_evento') is-invalid @enderror" id="id_evento"
                     name="id_evento" value="{{ old('id_evento', $periferico->id_evento) }}">
                 @error('id_evento')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
 
             <!-- Agrega más campos según sea necesario -->
             <br>

@@ -52,7 +52,11 @@
 
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="submit" id="btnGuardar" class="btn btn-primary" onclick="mostrarLoading()">Guardar</button>
+                <button class="btn btn-primary d-none" type="button" id="btnLoading" disabled>
+                    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                    <span role="status">Loading...</span>
+                </button>
                 <a href="{{ route('revisiones.index') }}" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('usuario_modifica', 50)->nullable();
 
             $table->unsignedInteger('id_equipo');
-            $table->foreign('id_equipo')->references('id_equipo')->on('equipos')->onDelete('cascade');
+            $table->foreign('id_equipo')->references('id_equipo')->on('equipos');
 
             $table->timestamps();
         });

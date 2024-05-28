@@ -14,7 +14,7 @@ class PerifericoController extends Controller
             'tipo_periferico' => 'required|string|max:255',
             'nombre_periferico' => 'required|string|max:255',
             'id_perfil' => 'required',
-            'id_evento' => 'required',
+            // 'id_evento' => 'required',
             // Agrega más validaciones según sea necesario
         ]);
     }
@@ -49,7 +49,7 @@ class PerifericoController extends Controller
         $periferico->tipo_periferico = $request->input('tipo_periferico');
         $periferico->nombre_periferico = $request->input('nombre_periferico');
         $periferico->id_perfil = $request->input('id_perfil');
-        $periferico->id_evento = $request->input('id_evento');
+        // $periferico->id_evento = $request->input('id_evento');
 
         $periferico->save();
         return redirect()->route('perifericos.index')->with('sucess', 'Periferico creado correctamente');
@@ -84,7 +84,7 @@ class PerifericoController extends Controller
         $periferico->tipo_periferico = $request->input('tipo_periferico');
         $periferico->nombre_periferico = $request->input('nombre_periferico');
         $periferico->id_perfil = $request->input('id_perfil');
-        $periferico->id_evento = $request->input('id_evento');
+        // $periferico->id_evento = $request->input('id_evento');
         $periferico->save();
 
         return redirect()->route('perifericos.index')->with('success', 'Periferico Actualizado con exito');

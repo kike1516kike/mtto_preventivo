@@ -106,44 +106,41 @@
             </table>
         </div>
 
-        {{-- Pagination links --}}
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-center">
-                <nav arial-label="Page navegation example">
-                    <ul class="pagination">
-                        @if ($mantenimientos->onFirstPage())
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                            </li>
-                        @else
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $mantenimientos->previousPageUrl() }}"
-                                    tabindex="-1">Anterior</a>
-                            </li>
-                        @endif
+    {{-- Pagination links --}}
+<div class="row">
+    <div class="col-md-12 d-flex justify-content-center">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @if ($mantenimientos->onFirstPage())
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
+                        </li>
+                    @else
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $mantenimientos->previousPageUrl() }}" tabindex="-1">Anterior</a>
+                        </li>
+                    @endif
 
-                        @foreach ($mantenimientos->getUrlRange(1, $mantenimientos->lastPage()) as $page => $url)
-                            <li class="page-item {{ $page == $mantenimientos->currentPage() ? 'active' : '' }}">
-                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                            </li>
-                        @endforeach
+                    @foreach ($mantenimientos->getUrlRange(max(1, $mantenimientos->currentPage() - 2), min($mantenimientos->lastPage(), $mantenimientos->currentPage() + 2)) as $page => $url)
+                        <li class="page-item {{ $page == $mantenimientos->currentPage() ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
 
-                        @if ($mantenimientos->hasMorePages())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $mantenimientos->nextPageUrl() }}">Siguiente</a>
-                            </li>
-                        @else
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#">Siguiente</a>
-                            </li>
-                        @endif
-                    </ul>
-                </nav>
-            </div>
+                    @if ($mantenimientos->hasMorePages())
+                        <li class="page-item">
+                            <a class="page-link" href="{{ $mantenimientos->nextPageUrl() }}">Siguiente</a>
+                        </li>
+                    @else
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">Siguiente</a>
+                        </li>
+                    @endif
+                </ul>
+            </nav>
         </div>
     </div>
-
-
+</div>
 
 @endsection
 

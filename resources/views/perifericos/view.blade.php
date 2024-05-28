@@ -13,7 +13,7 @@
                         Detalles del Periferico
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table tablaview">
                             <tbody>
                                 <tr>
                                     <th scope="row" class="text-md-right">ID:</th>
@@ -31,10 +31,10 @@
                                     <th scope="row" class="text-md-right">encargado:</th>
                                     <td>{{ $nombre_perfil }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <th scope="row" class="text-md-right">Id Evento:</th>
                                     <td>{{ $periferico->id_evento }}</td>
-                                </tr>
+                                </tr> --}}
                                 <!-- Agrega más campos según sea necesario -->
                             </tbody>
                         </table>

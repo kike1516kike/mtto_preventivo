@@ -17,6 +17,6 @@ class Periferico extends Model
         'tipo_periferico',
         'nombre_periferico',
         'id_perfil',
-        'id_evento',
+        // 'id_evento',
     ];
 }

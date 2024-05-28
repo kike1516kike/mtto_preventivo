@@ -5,27 +5,35 @@
 @section('content')
 
 
+{{-- AQUI SE MUESTRA EL ERROR DE CREDENCIALES INCORRECTAS --}}
+    @if ($errors->any())
+        <div class="alert alert-danger notificacion">
 
-    <form method="POST" class="centrado_login col-md-6 mx-auto">
-        <h1>Login Cofasa</h1>
-        <h6>Mantenimiento Preventivo IT</h6>
-        @if ($errors->any())
-            <ul>
+            <div>
                 @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                    {{ $error }}
                 @endforeach
-            </ul>
-        @endif
-        @csrf
-        <label for="">
-            <input name="usuario" type="text" required autofocus value="{{ old('usuario') }}" placeholder="usuario">
-        </label>
-        <label for="">
-            <input name="password" type="password" required placeholder="contraseña">
-        </label>
-        <button type="submit">Login</button>
-    </form>
+            </div>
+        </div>
+    @endif
 
+    <div class="loginbox">
+        <img src="{{ asset('img/logomtto.jpg') }}" alt="" class="avatar">
+        <h1>L C</h1>
+        <h6>Mantenimiento Preventivo IT</h6>
+        <form method="POST">
+
+            @csrf
+            <p>Usuario</p>
+            <input name="usuario" type="text" required autofocus value="{{ old('usuario') }}" placeholder="usuario">
+            <p>Contraseña</p>
+            <input name="password" type="password" required placeholder="contraseña">
+
+            <input type="submit" value="Login">
+            <a href="#">Lost your password</a>
+            <a href="#">Don't have an account? </a>
+        </form>
+    </div>
 
 
 @endsection

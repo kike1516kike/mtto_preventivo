@@ -13,7 +13,7 @@
                     Detalles de la Version de Office
                 </div>
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table tablaview">
                         <tbody>
                             <tr>
                                 <th scope="row" class="text-md-right">ID:</th>

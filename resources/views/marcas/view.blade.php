@@ -13,9 +13,9 @@
                         Detalles de la Marca de equipo
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table tablaview">
                             <tbody>
-                                <tr>
+                                <tr >
                                     <th scope="row" class="text-md-right">ID:</th>
                                     <td>{{ $marca->id_marca }}</td>
                                 </tr>

@@ -21,12 +21,12 @@ class EquipoController extends Controller
             'id_marca' => 'required',
             'id_ubicacion' => 'required',
             'id_perfil' => 'required',
-            'id_evento' => 'required',
+            // 'id_evento' => 'required',
             'id_office' => 'required',
             'modelo_equipo' => 'required|string|max:255',
             'sistema_operativo_equipo' => 'required|string|max:255',
             'ram_equipo' => 'required|integer|max:255',
-            'procesador_equipo' => 'required|string|max:255',
+            'procesador_equipo' => 'required|string',
             'disco_equipo' => 'required|string|max:255',
             'estado_equipo',
             'ip_equipo' => 'required|integer',
@@ -67,7 +67,6 @@ class EquipoController extends Controller
     public function index()
     {
         $equipos = Equipo::paginate(10);
-
         return view('equipos.index', compact('equipos'));
     }
 
@@ -111,7 +110,7 @@ class EquipoController extends Controller
         $equipo->id_office = $request->input('id_office');
         $equipo->id_perfil = $request->input('id_perfil');
         $equipo->id_ubicacion = $request->input('id_ubicacion');
-        $equipo->id_evento = $request->input('id_evento');
+        // $equipo->id_evento = $request->input('id_evento');
 
         $equipo->save();
 
@@ -168,7 +167,7 @@ class EquipoController extends Controller
         $equipo->id_office = $request->input('id_office');
         $equipo->id_perfil = $request->input('id_perfil');
         $equipo->id_ubicacion = $request->input('id_ubicacion');
-        $equipo->id_evento = $request->input('id_evento');
+        // $equipo->id_evento = $request->input('id_evento');
 
         $equipo->save();
 

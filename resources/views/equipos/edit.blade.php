@@ -8,6 +8,11 @@
         <form action="{{ route('equipos.update', $equipo) }}" method="POST">
             @csrf
             @method('PUT')
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                <a href="{{ route('eventos.create', ['id' => $equipo->id_equipo]) }}" class="btn btn-primary">Observación</a>
+                <a href="{{ route('equipos.index') }}" class="btn btn-secondary">Cancelar</a>
+            </div>
 
             <div class="form-group">
                 <label for="nombre_equipo">Nombre del Equipo:</label>
@@ -184,19 +189,16 @@
                 @enderror
             </div>
 
-            <div class="form-group">id evento:</label>
+            {{-- <div class="form-group">id evento:</label>
                 <input type="text" class="form-control @error('id_evento') is-invalid @enderror" id="id_evento"
                     name="id_evento" placeholder="128.100.1.?" value="{{ old('id_evento', $equipo->id_evento) }}">
                 @error('id_evento')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
-            </div>
+            </div> --}}
             <!-- Agrega más campos según sea necesario -->
             <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                <a href="{{ route('equipos.index') }}" class="btn btn-secondary">Cancelar</a>
-            </div>
+
         </form>
     </div>
 @endsection

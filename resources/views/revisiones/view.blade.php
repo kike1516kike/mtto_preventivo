@@ -15,7 +15,7 @@
         @if ($registros->isEmpty())
             <p>No hay registros de mantenimiento asociados a esta revisión.</p>
         @else
-            <table class="table">
+            <table class="table tablaview">
                 <thead>
                     <tr>
                         <th>Fecha de Mantenimiento</th>

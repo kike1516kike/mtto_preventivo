@@ -24,7 +24,8 @@
                             <td class="text-center">
                                 <a href="{{ route('marcas.edit', $marca) }}" class="btn btn-primary btn-sm">Editar</a>
                                 <a href="{{ route('marcas.show', $marca) }}" class="btn btn-info btn-sm">Ver</a>
-                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $marca->id_marca }}">Eliminar</button>
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal{{ $marca->id_marca }}">Eliminar</button>
                             </td>
                         </tr>
                     @empty
@@ -35,11 +36,10 @@
                 </tbody>
             </table>
         </div>
-
         {{-- Pagination links --}}
         <div class="row">
             <div class="col-md-12 d-flex justify-content-center">
-                <nav arial-label="Page navegation example">
+                <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         @if ($marcas->onFirstPage())
                             <li class="page-item disabled">
@@ -51,7 +51,7 @@
                             </li>
                         @endif
 
-                        @foreach ($marcas->getUrlRange(1, $marcas->lastPage()) as $page => $url)
+                        @foreach ($marcas->getUrlRange(max(1, $marcas->currentPage() - 2), min($marcas->lastPage(), $marcas->currentPage() + 2)) as $page => $url)
                             <li class="page-item {{ $page == $marcas->currentPage() ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>
@@ -72,42 +72,46 @@
         </div>
     </div>
 
+
     <!-- Modal -->
     @foreach ($marcas as $marca)
-    <div class="modal fade" id="confirmDeleteModal{{ $marca->id_marca }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ $marca->id_marca }}" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-dark" id="confirmDeleteModalLabel{{ $marca->id_marca }}">Eliminar Marca</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-dark">
-                    ¿Estás seguro de que deseas eliminar esta marca?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                    <!-- Form for deletion -->
-                    <form action="{{ route('marcas.destroy', $marca) }}" method="post" id="deleteForm{{ $marca->id_marca }}" class="frmDelete">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                    </form>
+        <div class="modal fade" id="confirmDeleteModal{{ $marca->id_marca }}" tabindex="-1"
+            aria-labelledby="confirmDeleteModalLabel{{ $marca->id_marca }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="confirmDeleteModalLabel{{ $marca->id_marca }}">Eliminar Marca
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-dark">
+                        ¿Estás seguro de que deseas eliminar esta marca?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                        <!-- Form for deletion -->
+                        <form action="{{ route('marcas.destroy', $marca) }}" method="post"
+                            id="deleteForm{{ $marca->id_marca }}" class="frmDelete">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endforeach
 
 @endsection
 
 @section('scripts')
-<script>
-    var confirmDeleteModal = document.getElementById('confirmDeleteModal');
-    confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
-        var button = event.relatedTarget;
-        var route = button.getAttribute('data-route');
-        var form = confirmDeleteModal.querySelector('#deleteForm');
-        form.action = route;
-    });
-</script>
+    <script>
+        var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+        confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var route = button.getAttribute('data-route');
+            var form = confirmDeleteModal.querySelector('#deleteForm');
+            form.action = route;
+        });
+    </script>
 @endsection

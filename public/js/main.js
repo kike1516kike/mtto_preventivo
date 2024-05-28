@@ -16,4 +16,3 @@ function ocultarNotificaciones() {
 
 document.addEventListener('DOMContentLoaded', ocultarNotificaciones);
 
-

@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
 
-        <h1>Listado de Perfiles</h1>
+        <h1 >Listado de Perfiles</h1>
         <a href="{{ route('perfiles.create') }}" class="btn btn-success mb-3">Crear Nuevo Perfil</a>
         <div class="table-responsive">
             <table class="table table-WHITE table-striped">

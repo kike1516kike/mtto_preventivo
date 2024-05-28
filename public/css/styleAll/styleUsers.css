@@ -1,15 +1,88 @@
-h1, h5, p, label{
-  color: black;
+*{
+margin: 0;
+padding: 0;
+
+}
+
+
+h1,h4, h5,h6, p, label, th,td{
+color: white;
+}
+
+.parrafoInicio{
+    text-align: justify;
 }
 
 .frmDelete{
-    display: inline;
+display: inline;
 }
 
 .table-responsive {
-    overflow-x: visible !important;
+overflow-x: visible !important;
 }
 
 .negro:hover {
-    color: black !important;
+color: black !important;
+padding: 2px;
+}
+
+
+.columna1 > h2{
+    color: #fff;
+}
+
+@media (min-width: 992px) {
+   .columna2 {
+        border-radius: .75em;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+        background: #fff;
+        color: #000; /* Cambia el color del texto a negro */
+        padding: 1.14rem 1.52rem;
+        height: 100%;
+        margin-left: 5%;
     }
+}
+
+@media (max-width: 991px) {
+    .columna2 {
+        border-radius: .75em;
+        box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+        background: #fff;
+        color: #000; /* Cambia el color del texto a negro */
+        padding: 1.14rem 1.52rem;
+        height: 100%;
+    }
+}
+/*
+.columna2 {
+    border-radius: .75em;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+    background: #fff;
+    color:#fff;
+    padding: 1.14rem 1.52rem;
+
+    height: 100%;
+    margin-left: 5%;
+}
+ */
+
+.titulo1 {
+color:#fff;
+font-family: sans-serif;
+font-style: italic;
+}
+
+.tituloMandamiento{
+font-family: sans-serif;
+text-align: center;
+font-weight: bold;
+color: black;
+}
+
+
+.listMandamiento{
+    color: black ;
+margin: 0;
+padding: 0px 5px 3px 5px;
+text-align: justify;
+}
