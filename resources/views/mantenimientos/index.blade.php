@@ -48,7 +48,7 @@
                             <td class="text-center">
                                 <div class="dropdown">
 
-                                    <img class=" dropdown-toggle"
+                                    <img class=" dropdown-toggle bg-light "
                                         id="dropdownMenuButton{{ $mantenimiento->id_mantenimiento }}"
                                         data-bs-toggle="dropdown" aria-expanded="false"
                                         src="{{ asset('iconos/tres_puntos.ico') }}" width="15" title="Menu Desplegable">

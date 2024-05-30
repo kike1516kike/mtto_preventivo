@@ -1,42 +1,37 @@
 @extends('layouts.app')
 
-@section('title', 'Perifericos')
+@section('title', 'Observaciones')
 
 @section('content')
     <div class="container">
 
-        <h1>Listado de Perifericos</h1>
-        <a href="{{ route('perifericos.create') }}" class="btn btn-success ">Crear Nuevo Registro</a>
-        <a href="{{ route('observaciones.index') }}" class="btn btn-primary ">IR A LISTADO DE OBSERVACIONES</a>
+        <h1>Listado de Observaciones</h1>
+        {{-- <a href="{{ route('equipos.create', ['id' =>  $idPrimerEquipo]) }}" class="btn btn-success mb-3">Crear Nuevo Registro</a> --}}
+        <a href="{{ route('perifericos.index') }}" class="btn btn-success">IR A LISTADO DE PERIFERICOS</a>
         <div class="table-responsive">
             <table class="table table-WHITE table-striped">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">#</th>
-                        <th scope="col">Tipo Periferico</th>
-                        <th scope="col">Nombre del Periferico</th>
-                        {{-- <th scope="col">Usuario asignado</th> --}}
+                        <th scope="col">Descripcion de Periferico</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($perifericos as $periferico)
+                    @forelse ($observaciones as $observacion)
                         <tr>
-                            <td scope="row" class="text-center">{{ $periferico->id_periferico }}</td>
-                            <td class="text-center">{{ $periferico->tipo_periferico }}</td>
-                            <td class="text-center">{{ $periferico->nombre_periferico }}</td>
-                            {{-- <td class="text-center">{{ $nombre_perfil }}</td> --}}
+                            <td scope="row" class="text-center">{{ $observacion->id_observacion }}</td>
+                            <td class="text-center">{{ $observacion->descripcion_evento }}</td>
                             <td class="text-center">
-                                <a href="{{ route('perifericos.edit', $periferico) }}"
-                                    class="btn btn-primary btn-sm">Editar</a>
-                                <a href="{{ route('perifericos.show', $periferico) }}" class="btn btn-info btn-sm">Ver</a>
+                                <a href="{{ route('observaciones.edit', $observacion) }}" class="btn btn-primary btn-sm">Editar</a>
+                                <a href="{{ route('observaciones.show', $observacion) }}" class="btn btn-info btn-sm">Ver</a>
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#confirmDeleteModal{{ $periferico->id_periferico }}">Eliminar</button>
+                                    data-bs-target="#confirmDeleteModal{{ $observacion->id_observacion }}">Eliminar</button>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center">No hay Perifericos registrados.</td>
+                            <td colspan="5" class="text-center">No hay observaciones registrados.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -48,26 +43,25 @@
             <div class="col-md-12 d-flex justify-content-center">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                        @if ($perifericos->onFirstPage())
+                        @if ($observaciones->onFirstPage())
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
                             </li>
                         @else
                             <li class="page-item">
-                                <a class="page-link" href="{{ $perifericos->previousPageUrl() }}"
-                                    tabindex="-1">Anterior</a>
+                                <a class="page-link" href="{{ $observaciones->previousPageUrl() }}" tabindex="-1">Anterior</a>
                             </li>
                         @endif
 
-                        @foreach ($perifericos->getUrlRange(max(1, $perifericos->currentPage() - 2), min($perifericos->lastPage(), $perifericos->currentPage() + 2)) as $page => $url)
-                            <li class="page-item {{ $page == $perifericos->currentPage() ? 'active' : '' }}">
+                        @foreach ($observaciones->getUrlRange(max(1, $observaciones->currentPage() - 2), min($observaciones->lastPage(), $observaciones->currentPage() + 2)) as $page => $url)
+                            <li class="page-item {{ $page == $observaciones->currentPage() ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>
                         @endforeach
 
-                        @if ($perifericos->hasMorePages())
+                        @if ($observaciones->hasMorePages())
                             <li class="page-item">
-                                <a class="page-link" href="{{ $perifericos->nextPageUrl() }}">Siguiente</a>
+                                <a class="page-link" href="{{ $observaciones->nextPageUrl() }}">Siguiente</a>
                             </li>
                         @else
                             <li class="page-item disabled">
@@ -82,24 +76,24 @@
 
 
     <!-- Modal -->
-    @foreach ($perifericos as $periferico)
-        <div class="modal fade" id="confirmDeleteModal{{ $periferico->id_periferico }}" tabindex="-1"
-            aria-labelledby="confirmDeleteModalLabel{{ $periferico->id_periferico }}" aria-hidden="true">
+    @foreach ($observaciones as $observacion)
+        <div class="modal fade" id="confirmDeleteModal{{ $observacion->id_observacion }}" tabindex="-1"
+            aria-labelledby="confirmDeleteModalLabel{{ $observacion->id_observacion }}" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title text-dark" id="confirmDeleteModalLabel{{ $periferico->id_periferico }}">
-                            Eliminar Periferico</h5>
+                        <h5 class="modal-title text-dark" id="confirmDeleteModalLabel{{ $observacion->id_observacion }}">Eliminar
+                            observacion</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-dark">
-                        ¿Estás seguro de que deseas eliminar este periferico?
+                        ¿Estás seguro de que deseas eliminar este observacion?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
                         <!-- Form for deletion -->
-                        <form action="{{ route('perifericos.destroy', $periferico->id_periferico) }}" method="post"
-                            id="deleteForm{{ $periferico->id_periferico }}" class="frmDelete">
+                        <form action="{{ route('observaciones.destroy', $observacion->id_observacion) }}" method="post"
+                            id="deleteForm{{ $observacion->id_observacion }}" class="frmDelete">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>

@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -12,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('eventos', function (Blueprint $table) {
-            $table->increments('id_evento');
+        Schema::create('observaciones', function (Blueprint $table) {
+            $table->increments('id_observacion');
             $table->string('descripcion_evento')->nullable();
             // $table->string('tipo_equipo')->nullable();
             // $table->integer('codigo_equipo')->nullable();
@@ -24,7 +23,7 @@ return new class extends Migration
             $table->datetime('fecha_modifica')->nullable();
             $table->string('usuario_modifica', 50)->nullable();
 
-            $table->unsignedInteger('id_equipo');
+            $table->unsignedInteger('id_periferico');
             // $table->foreign('id_equipo')->references('id_equipo')->on('equipos');
 
             $table->timestamps();
@@ -36,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('eventos');
+        Schema::dropIfExists('observaciones');
     }
 };

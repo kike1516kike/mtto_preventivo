@@ -9,6 +9,11 @@
             @csrf
             @method('PUT')
             <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a href="{{ route('observaciones.create', ['id' => $periferico->id_periferico]) }}" class="btn btn-primary">Observación</a>
+                <a href="{{ route('perifericos.index') }}" class="btn btn-secondary">Cancelar</a>
+            </div>
+            <div class="form-group">
                 <label for="tipo_periferico">Tipo Periferico:</label>
                 <input type="text" class="form-control @error('tipo_periferico') is-invalid @enderror" id="tipo_periferico"
                     name="tipo_periferico" value="{{ old('tipo_periferico', $periferico->tipo_periferico) }}">
@@ -53,10 +58,7 @@
 
             <!-- Agrega más campos según sea necesario -->
             <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                <a href="{{ route('perifericos.index') }}" class="btn btn-secondary">Cancelar</a>
-            </div>
+
         </form>
     </div>
 @endsection

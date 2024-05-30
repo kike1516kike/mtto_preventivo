@@ -60,6 +60,9 @@
                                 <a class="dropdown-item text-dark" href="{{ route('eventos.index') }}">Eventos</a>
                             </li>
                             <li class="nav-item ">
+                                <a class="dropdown-item text-dark" href="{{ route('observaciones.index') }}">Observaciones</a>
+                            </li>
+                            <li class="nav-item ">
                                 <a class="dropdown-item text-dark"
                                     href="{{ route('mantenimientos.index') }}">Mantenimientos</a>
                             </li>

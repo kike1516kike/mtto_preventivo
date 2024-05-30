@@ -10,6 +10,7 @@ use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\EquipoController;
 use App\Http\Controllers\PerifericoController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\ObservacionController;
 use App\Http\Controllers\MantenimientoController;
 use App\Http\Controllers\RevisionController;
 use Illuminate\Support\Facades\Auth;
@@ -86,7 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/perifericos/{periferico}', [PerifericoController::class, 'update'])->name('perifericos.update');
     Route::delete('/perifericos/{periferico}', [PerifericoController::class, 'destroy'])->name('perifericos.destroy');
 
-    /*RUTAS DE Eventos*/
+    /*RUTAS DE Eventos Equipo*/
     Route::get('/eventos', [EventoController::class, 'index'])->name('eventos.index');
     Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
     Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
@@ -94,6 +95,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/eventos/{evento}/edit', [EventoController::class, 'edit'])->name('eventos.edit');
     Route::put('/eventos/{evento}', [EventoController::class, 'update'])->name('eventos.update');
     Route::delete('/eventos/{evento}', [EventoController::class, 'destroy'])->name('eventos.destroy');
+
+
+
+    /*RUTAS DE Observaciones Periferico*/
+    Route::get('/observaciones', [ObservacionController::class, 'index'])->name('observaciones.index');
+    Route::get('/observaciones/create', [ObservacionController::class, 'create'])->name('observaciones.create');
+    Route::post('/observaciones', [ObservacionController::class, 'store'])->name('observaciones.store');
+    Route::get('/observaciones/{evento}/view', [ObservacionController::class, 'show'])->name('observaciones.show');
+    Route::get('/observaciones/{evento}/edit', [ObservacionController::class, 'edit'])->name('observaciones.edit');
+    Route::put('/observaciones/{evento}', [ObservacionController::class, 'update'])->name('observaciones.update');
+    Route::delete('/observaciones/{evento}', [ObservacionController::class, 'destroy'])->name('observaciones.destroy');
 
     /*RUTAS DE Mantenimiento*/
     Route::get('/mantenimientos', [MantenimientoController::class, 'index'])->name('mantenimientos.index');

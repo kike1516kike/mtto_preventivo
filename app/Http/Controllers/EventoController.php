@@ -56,7 +56,7 @@ class EventoController extends Controller
 
         $evento = new Evento();
         $evento->descripcion_evento = $request->input('descripcion_evento');
-        
+
         $evento->id_equipo = $request->input('id_equipo');
         $evento->save();
         return redirect()->route('eventos.index')->with('success', 'Evento creado correctamente');
