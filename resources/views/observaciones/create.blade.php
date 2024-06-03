@@ -9,21 +9,24 @@
             @csrf
 
 
+   
+
+
             <div class="form-group">
                 <label for="id_periferico">Periferico:</label>
                 <input type="text" id="id_periferico_input" class="form-control" list="perifericos_list"
                     placeholder="Selecciona un periferico" value="{{ $nombrePeriferico }}">
                 <datalist id="perifericos_list">
                     @foreach ($perifericos as $periferico)
-                        <option value="{{ $periferico->nombre_perioferico }}">{{ $periferico->nombre_perioferico }}</option>
+                        <option value="{{ $periferico->nombre_periferico }}">{{ $periferico->nombre_periferico }}</option>
                     @endforeach
                 </datalist>
                 <select style="display: none;" id="id_periferico" name="id_periferico">
                     @foreach ($perifericos as $periferico)
-                        @if ($periferico->nombre_perioferico == $nombrePeriferico)
-                            <option value="{{ $periferico->id_periferico }}" selected>{{ $periferico->nombre_perioferico }}</option>
+                        @if ($periferico->nombre_periferico == $nombrePeriferico)
+                            <option value="{{ $periferico->id_periferico }}" selected>{{ $periferico->nombre_periferico }}</option>
                         @else
-                            <option value="{{ $periferico->id_periferico }}">{{ $periferico->nombre_perioferico }}</option>
+                            <option value="{{ $periferico->id_periferico }}">{{ $periferico->nombre_periferico }}</option>
                         @endif
                     @endforeach
                 </select>
@@ -56,20 +59,20 @@
 @endsection
 <script>
     $(document).ready(function() {
-        $('#id_equipo_input').select2({
+        $('#id_periferico_input').select2({
             theme: 'bootstrap-5',
-            placeholder: 'Selecciona un equipo',
+            placeholder: 'Selecciona un perifeico',
             allowClear: true, // Permite borrar la selección
         }).on('select2:select', function(e) {
             var data = e.params.data;
-            $('#id_equipo').val(data.id).trigger('change');
+            $('#id_periferico').val(data.id).trigger('change');
         }).on('select2:unselect', function(e) {
-            $('#id_equipo').val('').trigger('change');
+            $('#id_periferico').val('').trigger('change');
         });
 
         // Obtener el nombre del equipo seleccionado y mostrarlo en el campo de entrada
-        var nombreEquipoSeleccionado = $('#id_equipo option:selected').text();
-        $('#id_equipo_input').val(nombreEquipoSeleccionado);
+        var nombrePerifericoSeleccionado = $('#id_periferico option:selected').text();
+        $('#id_periferico_input').val(nombrePerifericoSeleccionado);
     });
 
 

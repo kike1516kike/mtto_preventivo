@@ -13,7 +13,7 @@
                     <tr class="text-center">
                         <th scope="col">#</th>
                         <th scope="col">Usuario</th>
-                        <th scope="col">Rol</th>
+                        <th scope="col">Nivel</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
@@ -22,12 +22,18 @@
                         <tr>
                             <th scope="row" class="text-center">{{ $usuario->id }}</th>
                             <td class="text-center">{{ $usuario->usuario }}</td>
-                            <td class="text-center">{{ $usuario->rol }}</td>
+                            @if ( $usuario->rol == 2)
+                                    <td class="text-center">Estandar</td>
+                                @else
+                                    <td class="text-center">Administrador</td>
+                                @endif
+                            {{-- <td class="text-center">{{ $usuario->rol }}</td> --}}
                             <td class="text-center">
                                 <a href="{{ route('usuarios.edit', $usuario) }}" class="btn btn-primary btn-sm">Editar</a>
                                 <a href="{{ route('usuarios.show', $usuario) }}" class="btn btn-info btn-sm">Ver</a>
+
                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#confirmDeleteModal">Eliminar</button>
+                                    data-bs-target="#confirmDeleteModal{{ $usuario->id }}">Eliminar</button>
                             </td>
                         </tr>
                     @endforeach
@@ -71,31 +77,33 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title text-dark" id="confirmDeleteModalLabel">Eliminar Usuario</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-dark">
-                    ¿Estás seguro de que deseas eliminar este usuario?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
-                    <!-- Form for deletion -->
-                    <form action="{{ route('usuarios.destroy', $usuario) }}" method="post" id="deleteForm"
-                        class="frmDelete">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                    </form>
+    @foreach ($usuarios as $usuario)
+        <div class="modal fade" id="confirmDeleteModal{{ $usuario->id }}" tabindex="-1"
+            aria-labelledby="confirmDeleteModalLabel{{ $usuario->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="confirmDeleteModalLabel{{ $usuario->id }}">
+                            Eliminar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-dark">
+                        ¿Estás seguro de que deseas eliminar esta usuario?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                        <!-- Form for deletion -->
+                        <form action="{{ route('usuarios.destroy', $usuario) }}" method="post"
+                            id="deleteForm{{ $usuario->id }}" class="frmDelete">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    @endforeach
 @endsection
 
 @section('scripts')

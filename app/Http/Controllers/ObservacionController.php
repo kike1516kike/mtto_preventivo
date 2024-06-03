@@ -39,12 +39,14 @@ class ObservacionController extends Controller
      */
     public function create()
     {
+
+        $perifericos = Periferico::all();
         $perifericoId =$_GET['id'];
         $periferico = Periferico::findOrFail($perifericoId);
         $nombrePeriferico = $periferico->nombre_periferico;
         // echo $equipoId;
-        $perifericos = Periferico::all();
-        return view('observaciones.create', compact('perifericos', 'perifericoId', 'nombrePeriferico'));
+
+        return view('observaciones.create', compact( 'perifericoId','perifericos', 'nombrePeriferico'));
     }
 
     /**
@@ -78,6 +80,7 @@ class ObservacionController extends Controller
      */
     public function edit(Observacion $observacion)
     {
+
         $perifericos = Periferico::all();
         $perifericoUnico = Periferico::find($observacion->id_periferico);
         $nombre_periferico_actual = $perifericoUnico->nombre_periferico;
@@ -90,6 +93,7 @@ class ObservacionController extends Controller
      */
     public function update(Request $request, $observacion)
     {
+        // dd($request->input('id_periferico'));
         $this->validar($request);
 
         $observacion = Observacion::find($observacion);

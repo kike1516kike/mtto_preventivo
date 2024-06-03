@@ -4,6 +4,11 @@
 
 @section('content')
     <div class=" container" style="">
+        @if(session('error'))
+            <div class="alert alert-danger notificacion">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="row" style=" margin-top:5%;">
 
 

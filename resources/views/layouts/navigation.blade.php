@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <a class="navbar-brand text-dark" href="{{ route('home') }}">MTTO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-        style="border-color: black; background-color: black; color: white;">
-<span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
-</button>
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            style="border-color: black; background-color: black; color: white;">
+            <span class="navbar-toggler-icon" style="filter: brightness(0) invert(1);"></span>
+        </button>
 
 
 
@@ -20,15 +20,20 @@
 
             <ul class="navbar-nav ml-auto">
                 {{-- @if (Auth::check() && Auth::user()->name == 'Administrador') --}}
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Gestión
-                        </a>
-                        <ul class="dropdown-menu bg-light">
+                <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Gestión
+                    </a>
+                    <ul class="dropdown-menu bg-light">
+                        @if (Auth::check() && Auth::user()->rol == 2)
                             <li class="nav-item">
                                 <a class="dropdown-item text-dark "
-                                    href="{{ route('usuarios.index') }}">Usuarios</a>
+                                    href="{{ route('destinatarios.index') }}">Usuario</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="dropdown-item text-dark " href="{{ route('usuarios.index') }}">Usuarios</a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -41,16 +46,13 @@
                                     href="{{ route('ubicaciones.index') }}">Ubicaciones</a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item text-dark "
-                                    href="{{ route('voffices.index') }}">V.Office</a>
+                                <a class="dropdown-item text-dark " href="{{ route('voffices.index') }}">V.Office</a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item text-dark "
-                                    href="{{ route('perfiles.index') }}">Perfiles</a>
+                                <a class="dropdown-item text-dark " href="{{ route('perfiles.index') }}">Perfiles</a>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item text-dark "
-                                    href="{{ route('equipos.index') }}">Equipos</a>
+                                <a class="dropdown-item text-dark " href="{{ route('equipos.index') }}">Equipos</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="dropdown-item text-dark "
@@ -60,7 +62,8 @@
                                 <a class="dropdown-item text-dark" href="{{ route('eventos.index') }}">Eventos</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="dropdown-item text-dark" href="{{ route('observaciones.index') }}">Observaciones</a>
+                                <a class="dropdown-item text-dark"
+                                    href="{{ route('observaciones.index') }}">Observaciones</a>
                             </li>
                             <li class="nav-item ">
                                 <a class="dropdown-item text-dark"
@@ -70,9 +73,9 @@
                                 <a class="dropdown-item text-dark"
                                     href="{{ route('revisiones.index') }}">Revisiones</a>
                             </li>
-
-                        </ul>
-                    </li>
+                        @endif
+                    </ul>
+                </li>
                 {{-- @else
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle text-white" href="#" role="button"

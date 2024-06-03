@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 class MantenimientoController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
@@ -85,7 +84,7 @@ class MantenimientoController extends Controller
             $mantenimiento->cod_usuario_firma = $request->input('cod_usuario_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
             $mantenimiento->save();
 
-           return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
+            return redirect()->route('mantenimientos.index')->with('success', 'Usuario y contraseña guardados exitosamente.');
         } else {
             return redirect()->back()->with('error', 'Credenciales de usuario incorrectas. Por favor, inténtalo de nuevo.');
         }
@@ -100,10 +99,10 @@ class MantenimientoController extends Controller
         ]);
 
         $mantenimiento = Mantenimiento::findOrFail($id_mantenimiento);
- $user = User::where('usuario', $request->nombre_auxiliar_firma)->first();
+        $user = User::where('usuario', $request->nombre_auxiliar_firma)->first();
 
         if ($user && Hash::check($request->password_auxiliar_firma, $user->password)) {
-           $mantenimiento->cod_auxi_firma = $request->input('cod_auxi_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
+            $mantenimiento->cod_auxi_firma = $request->input('cod_auxi_firma'); // Suponiendo que 'id' sea la clave primaria del usuario
             $mantenimiento->finalizado_mtto = true;
             $mantenimiento->save();
 
@@ -118,13 +117,12 @@ class MantenimientoController extends Controller
      */
     public function criterio(Mantenimiento $mantenimiento)
     {
-        if($mantenimiento->cod_usuario_firma == NULL){
+        if ($mantenimiento->cod_usuario_firma == null) {
             $detalles_mtto = Detalle_mtto::where('id_mantenimiento', $mantenimiento->id_mantenimiento)->get();
             return view('mantenimientos.criterio', compact('detalles_mtto', 'mantenimiento'));
-        }else{
+        } else {
             return redirect()->route('mantenimientos.index');
         }
-
     }
 
     public function update_criterios(Request $request, $id_mantenimiento)
@@ -141,7 +139,7 @@ class MantenimientoController extends Controller
 
     public function edit(Mantenimiento $mantenimiento)
     {
-      $opciones_tipo_equipo = ['Laptop', 'Escritorio'];
+        $opciones_tipo_equipo = ['Laptop', 'Escritorio'];
         return view('mantenimientos.edit', compact('opciones_tipo_equipo', 'mantenimiento'));
     }
 
@@ -150,7 +148,6 @@ class MantenimientoController extends Controller
      */
     public function update(Request $request, $mantenimiento)
     {
-
         // $request->validate([
         //     'fecha_mantenimiento' => 'required',
         //     'cod_empleado_mtto' => 'required|integer',
@@ -160,7 +157,7 @@ class MantenimientoController extends Controller
 
         $mantenimiento->fecha_mantenimiento = date('Y-m-d', strtotime($request->input('fecha_mantenimiento')));
         $mantenimiento->cod_empleado_mtto = $request->input('cod_empleado_mtto');
-       $mantenimiento->observacion_mtto = $request->input('observacion_mtto');
+        $mantenimiento->observacion_mtto = $request->input('observacion_mtto');
         $mantenimiento->save();
 
         return redirect()->route('mantenimientos.index')->with('success', 'Mantenimiento actualizado exitosamente.');

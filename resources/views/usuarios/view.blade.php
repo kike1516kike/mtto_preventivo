@@ -28,8 +28,13 @@
                                 <td>{{ $usuario->usuario }}</td>
                             </tr>
                             <tr>
-                                <th scope="row" class="text-md-right">Rol:</th>
-                                <td>{{ $usuario->rol }}</td>
+                                <th scope="row" class="text-md-right">Nivel:</th>
+                                @if ( $usuario->rol == 2)
+                                    <td>Estandar</td>
+                                @else
+                                    <td>Administrador</td>
+                                @endif
+
                             </tr>
                             <!-- Agrega más campos según sea necesario -->
                         </tbody>
