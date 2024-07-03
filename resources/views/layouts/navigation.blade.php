@@ -29,7 +29,7 @@
                         @if (Auth::check() && Auth::user()->rol == 2)
                             <li class="nav-item">
                                 <a class="dropdown-item text-dark "
-                                    href="{{ route('destinatarios.index') }}">Usuario</a>
+                                    href="{{ route('destinatarios.index') }}">Perfil</a>
                             </li>
                         @else
                             <li class="nav-item">

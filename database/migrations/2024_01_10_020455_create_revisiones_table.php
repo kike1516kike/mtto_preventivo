@@ -26,7 +26,7 @@ return new class extends Migration {
         AFTER INSERT
         AS
         BEGIN
-           
+
             INSERT INTO mantenimientos (fecha_mantenimiento, trimestre_mantenimiento, cod_empleado_mtto, id_revision)
             SELECT
                 GETDATE() AS fecha_mantenimiento,
@@ -42,6 +42,7 @@ return new class extends Migration {
         END
     ');
 
+       
     }
 
     /**

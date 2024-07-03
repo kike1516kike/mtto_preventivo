@@ -7,34 +7,10 @@ use App\Models\Perfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Redirect;
+
 class UsuarioController extends Controller
 {
-    /**
-     * Validate the incoming request.
-     */
-    // private function validar(Request $request)
-    // {
-
-    // }
-
-    /**
-     * Get the user data from the request.
-     */
-    // private function getUserData(Request $request)
-    // {
-    //     $userData = [
-    //         'usuario' => $request->usuario,
-    //         'rol' => $request->rol,
-    //         // Agrega más campos según sea necesario
-    //     ];
-
-    //     // Si se proporciona una contraseña, la agregamos a los datos
-    //     if ($request->filled('password')) {
-    //         $userData['password'] = Hash::make($request->password);
-    //     }
-
-    //     return $userData;
-    // }
 
     /**
      * Display a listing of the resource.
@@ -59,10 +35,13 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $request->validate([
             'usuario' => 'required|unique:users|string|max:255',
             'rol' => 'required|integer',
-            'password' => 'nullable|string|min:8',
+            'password' => 'required|string|min:8',
+            'password_confirmation' => 'required|string|min:8',
             'id_perfil',
             // Agrega más validaciones según sea necesario
         ]);
@@ -74,15 +53,19 @@ class UsuarioController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
+       
         $user->id_perfil = $request->input('id_perfil');
 
-        $user->save();
+        if($request->input('password') == $request->input('password_confirmation')){
+            $user->save();
 
-        // $userData = $this->getUserData($request);
+            return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
+        }else{
+            return redirect()->route('usuarios.create')->with('error', 'Las credenciales son diferentes.');
+        }
 
-        // User::create($userData);
 
-        return redirect()->route('usuarios.index')->with('success', 'Usuario creado correctamente');
+
     }
 
     /**
@@ -128,6 +111,7 @@ class UsuarioController extends Controller
         if ($request->filled('password')) {
             $user->password = Hash::make($request->input('password'));
         }
+
         $user->id_perfil = $request->input('id_perfil');
 
         $user->save();

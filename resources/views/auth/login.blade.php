@@ -5,7 +5,7 @@
 @section('content')
 
 
-{{-- AQUI SE MUESTRA EL ERROR DE CREDENCIALES INCORRECTAS --}}
+    {{-- AQUI SE MUESTRA EL ERROR DE CREDENCIALES INCORRECTAS --}}
     @if ($errors->any())
         <div class="alert alert-danger notificacion">
 
@@ -25,7 +25,8 @@
 
             @csrf
             <p>Usuario</p>
-            <input name="usuario" type="text" required autofocus value="{{ old('usuario') }}" placeholder="usuario">
+            <input name="usuario" type="text" required autofocus value="{{ old('usuario') }}" placeholder="usuario"
+                oninput="this.value = this.value.toUpperCase()">
             <p>Contraseña</p>
             <input name="password" type="password" required placeholder="contraseña">
 

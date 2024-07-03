@@ -59,6 +59,7 @@
                                 name="nombre_usuario_firma" required>
                         </div>
                         <div class="mb-3">
+                            
                             <label for="password_usuario_firma" class="form-label">Contraseña</label>
                             <input type="password" class="form-control" id="password_usuario_firma"
                                 name="password_usuario_firma" required>
